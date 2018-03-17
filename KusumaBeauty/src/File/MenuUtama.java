@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package File;
-
+import List.*;
+import Proses.*;
 
 /**
  *
@@ -207,12 +208,12 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_JMIExitActionPerformed
 
     private void JMIMasterKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIMasterKaryawanActionPerformed
-        /*if (GlobalVar.Var.listKaryawan == null) {
-            GlobalVar.Var.listKaryawan = new ListKaryawan();
+        if (GlobalVar.Var.listMasterPasien == null) {
+            GlobalVar.Var.listMasterPasien = new ListMasterPasien();
         } else {
-            GlobalVar.Var.listKaryawan.setState(NORMAL);
-            GlobalVar.Var.listKaryawan.toFront();
-        }*/
+            GlobalVar.Var.listMasterPasien.setState(NORMAL);
+            GlobalVar.Var.listMasterPasien.toFront();
+        }
     }//GEN-LAST:event_JMIMasterKaryawanActionPerformed
 
     private void JMIListPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListPackingActionPerformed
@@ -243,21 +244,21 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_JMIResetPasswordUserActionPerformed
 
     private void JMIMasterKendaraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIMasterKendaraanActionPerformed
-        /*if (GlobalVar.Var.listKendaraan == null) {
-            GlobalVar.Var.listKendaraan = new ListKendaraan();
+        if (GlobalVar.Var.listMasterBarang == null) {
+            GlobalVar.Var.listMasterBarang = new List();
         } else {
-            GlobalVar.Var.listKendaraan.setState(NORMAL);
-            GlobalVar.Var.listKendaraan.toFront();
-        }*/
+            GlobalVar.Var.listMasterBarang.setState(NORMAL);
+            GlobalVar.Var.listMasterBarang.toFront();
+        }
     }//GEN-LAST:event_JMIMasterKendaraanActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        /*if (GlobalVar.Var.listPartai == null) {
-            GlobalVar.Var.listPartai = new ListPartai();
+        if (GlobalVar.Var.listMasterDokter == null) {
+            GlobalVar.Var.listMasterDokter = new ListMasterDokter();
         } else {
-            GlobalVar.Var.listPartai.setState(NORMAL);
-            GlobalVar.Var.listPartai.toFront();
-        }*/
+            GlobalVar.Var.listMasterDokter.setState(NORMAL);
+            GlobalVar.Var.listMasterDokter.toFront();
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void JMIProsesPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesPackingActionPerformed
@@ -270,12 +271,12 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_JMIProsesPackingActionPerformed
 
     private void JMIProsesAbsenKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesAbsenKaryawanActionPerformed
-        /*if (GlobalVar.Var.absen == null) {
-            GlobalVar.Var.absen = new Absen();
+        if (GlobalVar.Var.tambahPenjualan == null) {
+            GlobalVar.Var.tambahPenjualan = new Penjualan();
         } else {
-            GlobalVar.Var.absen.setState(NORMAL);
-            GlobalVar.Var.absen.toFront();
-        }*/
+            GlobalVar.Var.tambahPenjualan.setState(NORMAL);
+            GlobalVar.Var.tambahPenjualan.toFront();
+        }
     }//GEN-LAST:event_JMIProsesAbsenKaryawanActionPerformed
 
     /**
