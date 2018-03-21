@@ -7,6 +7,7 @@ package Proses;
 
 import java.awt.event.KeyEvent;
 import javax.swing.table.TableColumn;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -18,36 +19,32 @@ public class Jcari extends javax.swing.JFrame {
      * Creates new form Jcari
      */
     String query1,
-
-    /**
-     * Creates new form JcariBarangMasuk
-     */
-
-    /**
-     * Creates new form Jcari
-     */
-    query2, 
-
-    /**
-     * Creates new form JcariBarangMasuk
-     */
-
-    /**
-     * Creates new form Jcari
-     */
-    judul1, 
-
-    /**
-     * Creates new form JcariBarangMasuk
-     */
-
-    /**
-     * Creates new form Jcari
-     */
-    judul2;
+            /**
+             * Creates new form JcariBarangMasuk
+             */
+            /**
+             * Creates new form Jcari
+             */
+            query2,
+            /**
+             * Creates new form JcariBarangMasuk
+             */
+            /**
+             * Creates new form Jcari
+             */
+            judul1,
+            /**
+             * Creates new form JcariBarangMasuk
+             */
+            /**
+             * Creates new form Jcari
+             */
+            judul2;
     Object selectedrow = null;
     int colnum;
     KomponenGUI.JtextF jf;
+    KomponenGUI.JRibuanTextField jr;
+
     /**
      *
      * @param Query_pencarian_1
@@ -58,17 +55,17 @@ public class Jcari extends javax.swing.JFrame {
      * @param Jf__parameter_untuk_isi_jtext_di_form_sbelumnya
      * @param FocusLeftOrRight__pilih_request_fokus_jtext_di_jcari
      */
-    
-    public Jcari(String Query1, String Query2, String Judul1, String Judul2, String Title,int Colnum,KomponenGUI.JtextF Jf,String FocusLeftOrRight) {
-        jf=Jf;
-        colnum=Colnum;
+
+    public Jcari(String Query1, String Query2, String Judul1, String Judul2, String Title, int Colnum, KomponenGUI.JtextF Jf, KomponenGUI.JRibuanTextField Jr, String FocusLeftOrRight) {
+        jf = Jf;
+        colnum = Colnum;
         query1 = Query1;
         query2 = Query2;
         judul1 = Judul1;
         judul2 = Judul2;
-        jf = Jf;
+        jr = Jr;
         initComponents();
-        if(FocusLeftOrRight != null){
+        if (FocusLeftOrRight != null) {
             JTCariNamaBarang.setText(FocusLeftOrRight);
             caridengannama();
             JTCariNamaBarang.requestFocus();
@@ -203,71 +200,72 @@ public class Jcari extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JTCariKodeBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTCariKodeBarangKeyReleased
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(),colnum).toString());
-            GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
-        } else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(), colnum).toString());
+            jr.requestFocus();
+            dispose();
+            jcari = null;
+        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             tbldata.requestFocus();
-            if(tbldata.getSelectedRow() == 0){
-               tbldata.setRowSelectionInterval(1, 1);
+            if (tbldata.getSelectedRow() == 0) {
+                tbldata.setRowSelectionInterval(1, 1);
             }
-        }
-        else
-        {
-        caridengankode();
+        } else {
+            caridengankode();
         }
     }//GEN-LAST:event_JTCariKodeBarangKeyReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        GlobalVar.Var.jcari=null;
+        jcari = null;
     }//GEN-LAST:event_formWindowClosing
 
     private void jbuttonF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF1ActionPerformed
-        jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(),colnum).toString());
-            GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
+        jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(), colnum).toString());
+        jr.requestFocus();
+        dispose();
+        jcari = null;
     }//GEN-LAST:event_jbuttonF1ActionPerformed
 
     private void jbuttonF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF2ActionPerformed
-        GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
+        jr.requestFocus();
+        dispose();
+        jcari = null;
     }//GEN-LAST:event_jbuttonF2ActionPerformed
 
     private void tbldataMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbldataMouseReleased
-        if(tbldata.getValueAt(tbldata.getSelectedRow(), colnum)==selectedrow)
-        {
-            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(),colnum).toString());
-            GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
-        } else{
-            selectedrow=tbldata.getValueAt(tbldata.getSelectedRow(), colnum);
+        if (tbldata.getValueAt(tbldata.getSelectedRow(), colnum) == selectedrow) {
+            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(), colnum).toString());
+            jr.requestFocus();
+            dispose();
+            jcari = null;
+        } else {
+            selectedrow = tbldata.getValueAt(tbldata.getSelectedRow(), colnum);
         }
     }//GEN-LAST:event_tbldataMouseReleased
 
     private void JTCariNamaBarangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTCariNamaBarangKeyReleased
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(),colnum).toString());
-            GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
-        } else if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(), colnum).toString());
+            jr.requestFocus();
+            dispose();
+            jcari = null;
+        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             tbldata.requestFocus();
-            if(tbldata.getSelectedRow() == 0){
-               tbldata.setRowSelectionInterval(1, 1);
+            if (tbldata.getSelectedRow() == 0) {
+                tbldata.setRowSelectionInterval(1, 1);
             }
-        }
-        else {
+        } else {
             caridengannama();
         }
-        
+
     }//GEN-LAST:event_JTCariNamaBarangKeyReleased
 
     private void tbldataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbldataKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(),colnum).toString());
-            GlobalVar.Var.jcari.dispose();
-            GlobalVar.Var.jcari=null;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            jf.setText(tbldata.getValueAt(tbldata.getSelectedRow(), colnum).toString());
+            jr.requestFocus();
+            dispose();
+            jcari = null;
         }
     }//GEN-LAST:event_tbldataKeyPressed
 
@@ -289,7 +287,7 @@ public class Jcari extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     void caridengankode() {
-        if(JTCariKodeBarang.getText().equals("")){
+        if (JTCariKodeBarang.getText().equals("")) {
             tbldata.setQuery(query1 + "LIKE '%" + JTCariKodeBarang.getText() + "%'");
         } else {
             tbldata.setQuery(query1 + "REGEXP '" + JTCariKodeBarang.getText().replace(" ", ".+") + "'");
@@ -297,14 +295,13 @@ public class Jcari extends javax.swing.JFrame {
         tbldata.tampilkan();
         TableColumn tableColumn = tbldata.getColumnModel().getColumn(0);
         tableColumn.setPreferredWidth(90);
-        if(tbldata.getRowCount()!=0)
-        {
+        if (tbldata.getRowCount() != 0) {
             tbldata.setRowSelectionInterval(0, 0);
         }
     }
 
     void caridengannama() {
-        if(JTCariNamaBarang.getText().equals("")){
+        if (JTCariNamaBarang.getText().equals("")) {
             tbldata.setQuery(query2 + "LIKE '%" + JTCariNamaBarang.getText() + "%'");
         } else {
             tbldata.setQuery(query2 + "REGEXP '" + JTCariNamaBarang.getText().replace(" ", ".+") + "'");
@@ -312,10 +309,9 @@ public class Jcari extends javax.swing.JFrame {
         tbldata.tampilkan();
         TableColumn tableColumn = tbldata.getColumnModel().getColumn(0);
         tableColumn.setPreferredWidth(90);
-        if(tbldata.getRowCount()!=0)
-        {
+        if (tbldata.getRowCount() != 0) {
             tbldata.setRowSelectionInterval(0, 0);
         }
     }
-    
+
 }

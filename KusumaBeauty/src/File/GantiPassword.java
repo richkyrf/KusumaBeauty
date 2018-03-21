@@ -11,6 +11,7 @@ import static File.EncMD5.getMD5;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -197,11 +198,11 @@ public class GantiPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_JTKonfirmasiPasswordKeyReleased
 
     private void JBBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBatalActionPerformed
-        GlobalVar.Var.gantiPassword.dispose();
+        dispose();
     }//GEN-LAST:event_JBBatalActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        GlobalVar.Var.gantiPassword = null;
+        gantiPassword = null;
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -250,7 +251,7 @@ public class GantiPassword extends javax.swing.JFrame {
                     Update update = new LSubProces.Update();
                     boolean ubah = update.Ubah("UPDATE `tbuser` SET `Password`='" + getMD5(new String(JTPasswordBaru.getPassword())) + "' WHERE `Username`='" + GlobalVar.VarL.username + "'", "Password", this);
                     if (ubah) {
-                        GlobalVar.Var.gantiPassword.dispose();
+                        dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Gagal Ganti Passsword. Password Lama Salah !!!", "Error", JOptionPane.ERROR_MESSAGE);

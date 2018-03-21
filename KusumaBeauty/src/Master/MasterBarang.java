@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -315,9 +316,9 @@ public class MasterBarang extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if (IdEdit == null) {
-            GlobalVar.Var.tambahMasterBarang = null;
+            tambahMasterBarang = null;
         } else {
-            GlobalVar.Var.ubahMasterBarang = null;
+            ubahMasterBarang = null;
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -391,8 +392,8 @@ public class MasterBarang extends javax.swing.JFrame {
             Insert insert = new Insert();
             Boolean berhasil = insert.simpan("INSERT INTO `tbmbarang`(`NamaBarang`, `IdJenisBarang`, `Harga`, `Keterangan`, `Status`) VALUES ('" + JTNamaBarang.getText() + "',(SELECT `IdJenisBarang` FROM `tbsmjenisbarang` WHERE `JenisBarang` = '" + JTJenisBarang.getSelectedItem() + "'),'" + JTHarga.getText() + "','" + JTAKeterangan.getText() + "', " + JCBStatus.isSelected() + ")", "Barang", this);
             if (berhasil) {
-                if (GlobalVar.Var.listMasterBarang != null) {
-                    GlobalVar.Var.listMasterBarang.load();
+                if (listMasterBarang != null) {
+                    listMasterBarang.load();
                 }
                 if (tutup) {
                     dispose();
@@ -412,8 +413,8 @@ public class MasterBarang extends javax.swing.JFrame {
             Boolean berhasil = update.Ubah("UPDATE `tbmbarang` SET `NamaBarang`='" + JTNamaBarang.getText() + "',`IdJenisBarang`=(SELECT `IdJenisBarang` FROM `tbsmjenisbarang` WHERE `JenisBarang` = '" + JTJenisBarang.getSelectedItem() + "'),`Harga`='" + JTHarga.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "', `Status` = " + JCBStatus.isSelected() + " WHERE `IdBarang` = " + IdEdit, "Barang", this);
             if (berhasil) {
                 dispose();
-                if (GlobalVar.Var.listMasterBarang != null) {
-                    GlobalVar.Var.listMasterBarang.load();
+                if (listMasterBarang != null) {
+                    listMasterBarang.load();
                 }
             }
         }

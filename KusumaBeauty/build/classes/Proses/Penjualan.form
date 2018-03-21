@@ -89,18 +89,18 @@
                                   <Component id="JTNamaBarang" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jbuttonF11" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="JBSearchNamaBarang" min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="jbuttonF11" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jlabelF8" alignment="1" min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="JTJumlah" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jlabelF8" pref="77" max="32767" attributes="0"/>
+                                  <Component id="JTJumlah" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -174,7 +174,6 @@
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jlabelF10" alignment="0" pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlabelF7" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlabelF8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -182,15 +181,16 @@
                       <Component id="jlabelF11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbuttonF11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jlabelF10" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="JTJumlah" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTHargaSatuan" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTNamaBarang" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTStock" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTJumlah" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="JBSearchNamaBarang" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
@@ -205,12 +205,12 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="hapustable1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="293" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="226" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <EmptySpace pref="9" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -420,15 +420,6 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="KomponenGUI.JNumberOnly" name="JTJumlah">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-      </Properties>
-      <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="JTJumlahFocusLost"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTJumlahKeyPressed"/>
-      </Events>
-    </Component>
     <Component class="KomponenGUI.JtextF" name="jlabelF9">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
@@ -496,7 +487,7 @@
     <Component class="KomponenGUI.JtextF" name="JTStock">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="0,00"/>
+        <Property name="text" type="java.lang.String" value="100,00"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
@@ -514,6 +505,7 @@
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="JTHargaSatuanFocusLost"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTHargaSatuanKeyPressed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTHargaSatuanKeyReleased"/>
       </Events>
     </Component>
     <Component class="KomponenGUI.JbuttonF" name="jbuttonF5">
@@ -616,6 +608,12 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBSearchNamaBarangActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JBSearchNamaBarangKeyPressed"/>
+      </Events>
+    </Component>
+    <Component class="KomponenGUI.JRibuanTextField" name="JTJumlah">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTJumlahKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

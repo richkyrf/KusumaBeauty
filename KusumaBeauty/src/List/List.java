@@ -9,6 +9,8 @@ import LSubProces.Delete;
 import Master.*;
 import javax.swing.JOptionPane;
 import static GlobalVar.Var.*;
+import Proses.Penjualan;
+import javax.swing.JFrame;
 
 /**
  *
@@ -34,6 +36,9 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Master Pasien":
                 setTitle("List Master Pasien");
+                break;
+            case "Penjualan":
+                setTitle("List Penjualan");
                 break;
             default:
                 throw new AssertionError();
@@ -214,27 +219,35 @@ public class List extends javax.swing.JFrame {
     void tambah() {
         switch (Type) {
             case "Master Barang":
-                if (tambahMasterBarang.isVisible()) {
+                if (tambahMasterBarang == null) {
+                    tambahMasterBarang = new MasterBarang();
+                } else {
                     tambahMasterBarang.setState(NORMAL);
                     tambahMasterBarang.toFront();
-                } else {
-                    new MasterBarang();
                 }
                 break;
             case "Master Dokter":
-                if (tambahMasterDokter.isVisible()) {
+                if (tambahMasterDokter == null) {
+                    tambahMasterDokter = new MasterDokter();
+                } else {
                     tambahMasterDokter.setState(NORMAL);
                     tambahMasterDokter.toFront();
-                } else {
-                    new MasterDokter();
                 }
                 break;
             case "Master Pasien":
-                if (tambahMasterPasien.isVisible()) {
+                if (tambahMasterPasien == null) {
+                    tambahMasterPasien = new MasterPasien();
+                } else {
                     tambahMasterPasien.setState(NORMAL);
                     tambahMasterPasien.toFront();
+                }
+                break;
+            case "Penjualan":
+                if (tambahPenjualan == null) {
+                    tambahPenjualan = new Penjualan();
                 } else {
-                    new MasterPasien();
+                    tambahPenjualan.setState(NORMAL);
+                    tambahPenjualan.toFront();
                 }
                 break;
             default:
@@ -259,6 +272,9 @@ public class List extends javax.swing.JFrame {
                 case "Master Pasien":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmpasien` WHERE `IdPasien` = " + jcomCari1.GetIDTable(), "Pasien", this);
                     break;
+                case "Penjualan":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbpenjualan` WHERE `IdPenjualan` = " + jcomCari1.GetIDTable(), "Penjualan", this);
+                    break;
                 default:
                     throw new AssertionError();
             }
@@ -274,28 +290,36 @@ public class List extends javax.swing.JFrame {
         } else {
             switch (Type) {
                 case "Master Barang":
-                    if (ubahMasterBarang.isVisible()) {
-                        ubahMasterBarang.setState(NORMAL);
-                        ubahMasterBarang.toFront();
-                    } else {
-                        new MasterBarang(jcomCari1.GetIDTable());
-                    }
+                if (ubahMasterBarang == null) {
+                    ubahMasterBarang = new MasterBarang(jcomCari1.GetIDTable());
+                } else {
+                    ubahMasterBarang.setState(NORMAL);
+                    ubahMasterBarang.toFront();
+                }
                     break;
                 case "Master Dokter":
-                    if (ubahMasterDokter.isVisible()) {
-                        ubahMasterDokter.setState(NORMAL);
-                        ubahMasterDokter.toFront();
-                    } else {
-                        new MasterDokter(jcomCari1.GetIDTable());
-                    }
+                if (ubahMasterDokter == null) {
+                    ubahMasterDokter = new MasterDokter(jcomCari1.GetIDTable());
+                } else {
+                    ubahMasterDokter.setState(NORMAL);
+                    ubahMasterDokter.toFront();
+                }
                     break;
                 case "Master Pasien":
-                    if (ubahMasterPasien.isVisible()) {
-                        ubahMasterPasien.setState(NORMAL);
-                        ubahMasterPasien.toFront();
-                    } else {
-                        new MasterPasien(jcomCari1.GetIDTable());
-                    }
+                if (ubahMasterPasien == null) {
+                    ubahMasterPasien = new MasterPasien(jcomCari1.GetIDTable());
+                } else {
+                    ubahMasterPasien.setState(NORMAL);
+                    ubahMasterPasien.toFront();
+                }
+                    break;
+                case "Penjualan":
+                if (ubahPenjualan == null) {
+                    ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
+                } else {
+                    ubahPenjualan.setState(NORMAL);
+                    ubahPenjualan.toFront();
+                }
                     break;
                 default:
                     throw new AssertionError();
@@ -304,9 +328,27 @@ public class List extends javax.swing.JFrame {
     }
 
     public void load() {
-        jcomCari1.setQuery("SELECT `IdBarang` as 'ID', `NamaBarang` as 'Nama Barang', `JenisBarang`, `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmbarang`a JOIN `tbsmjenisbarang`b ON a.`IdJenisBarang`=b.`IdJenisBarang` WHERE 1");
-        jcomCari1.setRender(new int[]{3}, new String[]{"Number"});
-        jcomCari1.setOrder(" ORDER BY `JenisBarang`, `NamaBarang` ");
+        switch (Type) {
+            case "Master Barang":
+                jcomCari1.setQuery("SELECT `IdBarang` as 'ID', `NamaBarang` as 'Nama Barang', `JenisBarang`, `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmbarang`a JOIN `tbsmjenisbarang`b ON a.`IdJenisBarang`=b.`IdJenisBarang` WHERE 1");
+                jcomCari1.setRender(new int[]{3}, new String[]{"Number"});
+                jcomCari1.setOrder(" ORDER BY `JenisBarang`, `NamaBarang` ");
+                break;
+            case "Master Dokter":
+                jcomCari1.setQuery("SELECT `IdDokter` as 'ID', `NamaDokter` as 'Nama Dokter', `NoTelepon` as 'No Telpon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmdokter` WHERE 1 ");
+                jcomCari1.setOrder(" ORDER BY `NamaDokter` ");
+                break;
+            case "Master Pasien":
+                jcomCari1.setQuery("SELECT `IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', `JenisKelamin` as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpasien` WHERE 1");
+                jcomCari1.setOrder(" ORDER BY `NamaPasien` ");
+                break;
+            case "Penjualan":
+                jcomCari1.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");
+                jcomCari1.setOrder(" ORDER BY `NoTransaksi` DESC ");
+                break;
+            default:
+                throw new AssertionError();
+        }
         jcomCari1.tampilkan();
     }
 

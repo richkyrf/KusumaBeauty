@@ -5,6 +5,7 @@
  */
 package Master;
 
+import static GlobalVar.Var.*;
 import KomponenGUI.FDateF;
 import LSubProces.DRunSelctOne;
 import LSubProces.Insert;
@@ -307,9 +308,9 @@ public class MasterDokter extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if (IdEdit == null) {
-            GlobalVar.Var.tambahMasterDokter = null;
+            tambahMasterDokter = null;
         } else {
-            GlobalVar.Var.ubahMasterDokter = null;
+            ubahMasterDokter = null;
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -391,8 +392,8 @@ public class MasterDokter extends javax.swing.JFrame {
             Insert insert = new Insert();
             Boolean berhasil = insert.simpan("INSERT INTO `tbmdokter`(`NamaDokter`, `NoTelepon`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTNamaBarang.getText() + "','" + JTNoTelpon.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Dokter", this);
             if (berhasil) {
-                if (GlobalVar.Var.listMasterDokter != null) {
-                    GlobalVar.Var.listMasterDokter.load();
+                if (listMasterDokter != null) {
+                    listMasterDokter.load();
                 }
                 if (tutup) {
                     dispose();
@@ -413,8 +414,8 @@ public class MasterDokter extends javax.swing.JFrame {
             Boolean berhasil = update.Ubah("UPDATE `tbmdokter` SET `NamaDokter`='" + JTNamaBarang.getText() + "',`NoTelepon`='" + JTNoTelpon.getText() + "',`Alamat`='" + JTAlamat.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdDokter` = " + IdEdit, "Dokter", this);
             if (berhasil) {
                 dispose();
-                if (GlobalVar.Var.listMasterDokter != null) {
-                    GlobalVar.Var.listMasterDokter.load();
+                if (listMasterDokter != null) {
+                    listMasterDokter.load();
                 }
             }
         }

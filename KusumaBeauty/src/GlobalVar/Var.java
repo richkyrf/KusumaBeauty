@@ -9,6 +9,8 @@ import File.*;
 import Master.*;
 import List.*;
 import Proses.*;
+import static java.awt.Frame.NORMAL;
+import javax.swing.JFrame;
 
 /**
  *
@@ -24,13 +26,10 @@ public class Var {
     public static MasterBarang tambahMasterBarang, ubahMasterBarang;
     public static MasterDokter tambahMasterDokter, ubahMasterDokter;
     public static MasterPasien tambahMasterPasien, ubahMasterPasien;
-    
-    public static List listMasterBarang;
-    public static ListMasterDokter listMasterDokter;
-    public static ListMasterPasien listMasterPasien;
-    
+
+    public static List listMasterBarang, listMasterDokter, listMasterPasien, listPenjualan;
+
     public static Jcari jcari;
     public static Penjualan tambahPenjualan, ubahPenjualan;
-    
-    
+
 }

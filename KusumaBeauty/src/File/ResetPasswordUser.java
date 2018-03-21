@@ -9,6 +9,7 @@ import LSubProces.Update;
 import static File.EncMD5.getMD5;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -148,7 +149,7 @@ public class ResetPasswordUser extends javax.swing.JFrame {
     }//GEN-LAST:event_JTPasswordBaruKeyReleased
 
     private void JBBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBatalActionPerformed
-        GlobalVar.Var.resetPasswordUser.dispose();
+        dispose();
     }//GEN-LAST:event_JBBatalActionPerformed
 
     private void JCUsernameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCUsernameKeyReleased
@@ -162,7 +163,7 @@ public class ResetPasswordUser extends javax.swing.JFrame {
     }//GEN-LAST:event_JCUsernameKeyReleased
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        GlobalVar.Var.resetPasswordUser = null;
+        resetPasswordUser = null;
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -209,7 +210,7 @@ public class ResetPasswordUser extends javax.swing.JFrame {
             Update update = new LSubProces.Update();
             boolean ubah = update.Ubah("UPDATE `tbuser` SET `Password`='" + getMD5(new String(JTPasswordBaru.getPassword())) + "' WHERE `Username`='" + JCUsername.getSelectedItem() + "'", "Password User", this);
             if (ubah) {
-                GlobalVar.Var.resetPasswordUser.dispose();
+                dispose();
             }
         }
     }

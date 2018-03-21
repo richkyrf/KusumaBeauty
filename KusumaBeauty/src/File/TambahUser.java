@@ -9,6 +9,7 @@ import LSubProces.Insert;
 import static File.EncMD5.getMD5;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -178,7 +179,7 @@ public class TambahUser extends javax.swing.JFrame {
     }//GEN-LAST:event_JTUsernameKeyReleased
 
     private void JBBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBatalActionPerformed
-        GlobalVar.Var.tambahUser.dispose();
+        dispose();
     }//GEN-LAST:event_JBBatalActionPerformed
 
     private void JCLevelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCLevelKeyReleased
@@ -192,7 +193,7 @@ public class TambahUser extends javax.swing.JFrame {
     }//GEN-LAST:event_JCLevelKeyReleased
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        GlobalVar.Var.tambahUser = null;
+        tambahUser = null;
     }//GEN-LAST:event_formWindowClosed
 
     /**
@@ -242,7 +243,7 @@ public class TambahUser extends javax.swing.JFrame {
             Insert insert = new LSubProces.Insert();
             boolean simpan = insert.simpan("INSERT INTO `tbuser`(`Username`, `Password`, `Level`) VALUES ('" + JTUsername.getText() + "', '" + getMD5(new String(JTPassword.getPassword())) + "', '" + JCLevel.getSelectedItem() + "')", "User", this);
             if (simpan) {
-                GlobalVar.Var.tambahUser.dispose();
+                dispose();
             }
         }
     }

@@ -16,6 +16,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
+import static GlobalVar.Var.*;
+import Proses.Penjualan;
 
 /**
  *
@@ -84,11 +86,13 @@ public class MasterPasien extends javax.swing.JFrame {
     }
 
     void getKodePasien() {
-        DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.seterorm("Gagal Select Kode Pasien");
-        dRunSelctOne.setQuery("SELECT CONCAT(LEFT('"+JTNamaPasien.getText().toUpperCase()+"',1),' ',LPAD(COUNT('"+JTNamaPasien.getText()+"')+1,'4','0')) as 'Kode' FROM `tbmpasien` WHERE `NamaPasien` LIKE '" + JTNamaPasien.getText().substring(0, 1) + "%' ");
-        ArrayList<String> list = dRunSelctOne.excute(); 
-        JTKodePasien.setText(list.get(0));
+        if (!JTNamaPasien.getText().equals("")) {
+            DRunSelctOne dRunSelctOne = new DRunSelctOne();
+            dRunSelctOne.seterorm("Gagal Select Kode Pasien");
+            dRunSelctOne.setQuery("SELECT CONCAT(LEFT('" + JTNamaPasien.getText().toUpperCase() + "',1),' ',LPAD(COUNT('" + JTNamaPasien.getText() + "')+1,'4','0')) as 'Kode' FROM `tbmpasien` WHERE `NamaPasien` LIKE '" + JTNamaPasien.getText().substring(0, 1) + "%' ");
+            ArrayList<String> list = dRunSelctOne.excute();
+            JTKodePasien.setText(list.get(0));
+        }
     }
 
     /**
@@ -244,8 +248,10 @@ public class MasterPasien extends javax.swing.JFrame {
         jlableF16.setText(":");
 
         JDTanggalDaftar.setDate(new Date());
+        JDTanggalDaftar.setDateFormatString("dd-MM-yyyy");
 
         JDTanggalLahir.setDate(new Date());
+        JDTanggalLahir.setDateFormatString("dd-MM-yyyy");
 
         jlableF17.setText("No. Telpon");
 
@@ -479,9 +485,9 @@ public class MasterPasien extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if (IdEdit == null) {
-            GlobalVar.Var.tambahMasterPasien = null;
+            tambahMasterPasien = null;
         } else {
-            GlobalVar.Var.ubahMasterPasien = null;
+            ubahMasterPasien = null;
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -514,7 +520,7 @@ public class MasterPasien extends javax.swing.JFrame {
     }//GEN-LAST:event_JTAlamatKeyPressed
 
     private void JTNoTelponKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoTelponKeyReleased
-        
+
     }//GEN-LAST:event_JTNoTelponKeyReleased
 
     private void JTNamaPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTNamaPasienFocusLost
@@ -603,10 +609,15 @@ public class MasterPasien extends javax.swing.JFrame {
     void tambahData(Boolean tutup) {
         if (checkInput()) {
             Insert insert = new Insert();
-            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "dd-MM-yyyy") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "dd-MM-yyyy") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Pasien", this);
+            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "yyyy-MM-dd") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "yyyy-MM-dd") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Pasien", this);
             if (berhasil) {
-                if (GlobalVar.Var.listMasterPasien != null) {
-                    GlobalVar.Var.listMasterPasien.load();
+                if (listMasterPasien != null) {
+                    listMasterPasien.load();
+                }
+                if (tambahPenjualan != null || ubahPenjualan != null) {
+                    Penjualan.JCPasien.load("SELECT '-' as 'NamaPasien' UNION ALL SELECT `NamaPasien` FROM `tbmpasien` ");
+                    Penjualan.JCPasien.setSelectedItem(JTNamaPasien.getText());
+                    Penjualan.JCPasien.requestFocus();
                 }
                 if (tutup) {
                     dispose();
@@ -630,8 +641,8 @@ public class MasterPasien extends javax.swing.JFrame {
             Boolean berhasil = update.Ubah("UPDATE `tbmpasien` SET `KodePasien`='" + JTKodePasien.getText() + "',`NamaPasien`='" + JTNamaPasien.getText() + "',`JenisKelamin`='" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "',`TanggalDaftar`='" + FDateF.datetostr(JDTanggalDaftar.getDate(), "dd-MM-yyyy") + "',`TanggaLahir`='" + FDateF.datetostr(JDTanggalLahir.getDate(), "dd-MM-yyyy") + "',`NoTelpon`='" + JTNoTelpon.getText() + "',`Pekerjaan`='" + JTPekerjaan.getText() + "',`Email`='" + JTEmail.getText() + "',`Alamat`='" + JTAlamat.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdPasien` = " + IdEdit, "Pasien", this);
             if (berhasil) {
                 dispose();
-                if (GlobalVar.Var.listMasterPasien != null) {
-                    GlobalVar.Var.listMasterPasien.load();
+                if (listMasterPasien != null) {
+                    listMasterPasien.load();
                 }
             }
         }

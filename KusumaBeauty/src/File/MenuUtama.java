@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package File;
+
 import List.*;
 import Proses.*;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -108,7 +110,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMMaster.add(JMIMasterKaryawan);
 
-        JMIMasterKendaraan.setText("2. Master Obat");
+        JMIMasterKendaraan.setText("2. Master Barang");
         JMIMasterKendaraan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMIMasterKendaraanActionPerformed(evt);
@@ -186,20 +188,20 @@ public class MenuUtama extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JMITambahUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMITambahUserActionPerformed
-        if (GlobalVar.Var.tambahUser == null) {
-            GlobalVar.Var.tambahUser = new TambahUser();
+        if (tambahUser == null) {
+            tambahUser = new TambahUser();
         } else {
-            GlobalVar.Var.tambahUser.setState(NORMAL);
-            GlobalVar.Var.tambahUser.toFront();
+            tambahUser.setState(NORMAL);
+            tambahUser.toFront();
         }
     }//GEN-LAST:event_JMITambahUserActionPerformed
 
     private void JMIGantiPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIGantiPasswordActionPerformed
-        if (GlobalVar.Var.gantiPassword == null) {
-            GlobalVar.Var.gantiPassword = new GantiPassword();
+        if (gantiPassword == null) {
+            gantiPassword = new GantiPassword();
         } else {
-            GlobalVar.Var.gantiPassword.setState(NORMAL);
-            GlobalVar.Var.gantiPassword.toFront();
+            gantiPassword.setState(NORMAL);
+            gantiPassword.toFront();
         }
     }//GEN-LAST:event_JMIGantiPasswordActionPerformed
 
@@ -208,74 +210,59 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_JMIExitActionPerformed
 
     private void JMIMasterKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIMasterKaryawanActionPerformed
-        if (GlobalVar.Var.listMasterPasien == null) {
-            GlobalVar.Var.listMasterPasien = new ListMasterPasien();
+       if (listMasterPasien == null) {
+            listMasterPasien = new List("Master Pasien");
         } else {
-            GlobalVar.Var.listMasterPasien.setState(NORMAL);
-            GlobalVar.Var.listMasterPasien.toFront();
+            listMasterPasien.setState(NORMAL);
+            listMasterPasien.toFront();
         }
     }//GEN-LAST:event_JMIMasterKaryawanActionPerformed
 
     private void JMIListPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListPackingActionPerformed
-        /*if (GlobalVar.Var.listPacking == null) {
-            GlobalVar.Var.listPacking = new ListPacking();
+        if (listPenjualan == null) {
+            listPenjualan = new List("Penjualan");
         } else {
-            GlobalVar.Var.listPacking.setState(NORMAL);
-            GlobalVar.Var.listPacking.toFront();
-        }*/
+            listPenjualan.setState(NORMAL);
+            listPenjualan.toFront();
+        }
     }//GEN-LAST:event_JMIListPackingActionPerformed
 
     private void JMIListPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListPenjualanActionPerformed
-        /*if (GlobalVar.Var.listPenjualan == null) {
-            GlobalVar.Var.listPenjualan = new ListPenjualan();
-        } else {
-            GlobalVar.Var.listPenjualan.setState(NORMAL);
-            GlobalVar.Var.listPenjualan.toFront();
-        }*/
+        
     }//GEN-LAST:event_JMIListPenjualanActionPerformed
 
     private void JMIResetPasswordUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIResetPasswordUserActionPerformed
-        /*if (GlobalVar.Var.resetPasswordUser == null) {
-            GlobalVar.Var.resetPasswordUser = new ResetPasswordUser();
-        } else {
-            GlobalVar.Var.resetPasswordUser.setState(NORMAL);
-            GlobalVar.Var.resetPasswordUser.toFront();
-        }*/
+        
     }//GEN-LAST:event_JMIResetPasswordUserActionPerformed
 
     private void JMIMasterKendaraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIMasterKendaraanActionPerformed
-        if (GlobalVar.Var.listMasterBarang == null) {
-            GlobalVar.Var.listMasterBarang = new List();
+        if (listMasterBarang == null) {
+            listMasterBarang = new List("Master Barang");
         } else {
-            GlobalVar.Var.listMasterBarang.setState(NORMAL);
-            GlobalVar.Var.listMasterBarang.toFront();
+            listMasterBarang.setState(NORMAL);
+            listMasterBarang.toFront();
         }
     }//GEN-LAST:event_JMIMasterKendaraanActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (GlobalVar.Var.listMasterDokter == null) {
-            GlobalVar.Var.listMasterDokter = new ListMasterDokter();
+        if (listMasterDokter == null) {
+            listMasterDokter = new List("Master Dokter");
         } else {
-            GlobalVar.Var.listMasterDokter.setState(NORMAL);
-            GlobalVar.Var.listMasterDokter.toFront();
+            listMasterDokter.setState(NORMAL);
+            listMasterDokter.toFront();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void JMIProsesPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesPackingActionPerformed
-        /*if (GlobalVar.Var.tambahPacking == null) {
-            GlobalVar.Var.tambahPacking = new Packing();
-        } else {
-            GlobalVar.Var.tambahPacking.setState(NORMAL);
-            GlobalVar.Var.tambahPacking.toFront();
-        }*/
+       
     }//GEN-LAST:event_JMIProsesPackingActionPerformed
 
     private void JMIProsesAbsenKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesAbsenKaryawanActionPerformed
-        if (GlobalVar.Var.tambahPenjualan == null) {
-            GlobalVar.Var.tambahPenjualan = new Penjualan();
+        if (tambahPenjualan == null) {
+            tambahPenjualan = new Penjualan();
         } else {
-            GlobalVar.Var.tambahPenjualan.setState(NORMAL);
-            GlobalVar.Var.tambahPenjualan.toFront();
+            tambahPenjualan.setState(NORMAL);
+            tambahPenjualan.toFront();
         }
     }//GEN-LAST:event_JMIProsesAbsenKaryawanActionPerformed
 

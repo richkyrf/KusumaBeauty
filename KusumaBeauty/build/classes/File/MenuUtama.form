@@ -70,7 +70,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMIMasterKendaraan">
               <Properties>
-                <Property name="text" type="java.lang.String" value="2. Master Obat"/>
+                <Property name="text" type="java.lang.String" value="2. Master Barang"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMIMasterKendaraanActionPerformed"/>

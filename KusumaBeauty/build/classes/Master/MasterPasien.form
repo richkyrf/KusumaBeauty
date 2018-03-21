@@ -373,11 +373,17 @@
       </Properties>
     </Component>
     <Component class="KomponenGUI.JdateCF" name="JDTanggalDaftar">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JDTanggalDaftar.setDate(new Date());"/>
       </AuxValues>
     </Component>
     <Component class="KomponenGUI.JdateCF" name="JDTanggalLahir">
+      <Properties>
+        <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JDTanggalLahir.setDate(new Date());"/>
       </AuxValues>

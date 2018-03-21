@@ -15,6 +15,7 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import static javax.swing.UIManager.setLookAndFeel;
+import static GlobalVar.Var.*;
 
 /**
  *
@@ -163,7 +164,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_JTPasswordKeyReleased
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        GlobalVar.Var.login = null;
+        login = null;
     }//GEN-LAST:event_formWindowClosed
 
     /**
