@@ -37,6 +37,9 @@ public class List extends javax.swing.JFrame {
             case "Master Pasien":
                 setTitle("List Master Pasien");
                 break;
+            case "Master Beautician":
+                setTitle("List Master Beautician");
+                break;
             case "Penjualan":
                 setTitle("List Penjualan");
                 break;
@@ -68,6 +71,11 @@ public class List extends javax.swing.JFrame {
         jbuttonF5 = new KomponenGUI.JbuttonF();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jbuttonF1.setText("Ubah");
         jbuttonF1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,6 +173,28 @@ public class List extends javax.swing.JFrame {
         tambah();
     }//GEN-LAST:event_jbuttonF5ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        switch (Type) {
+            case "Master Barang":
+                listMasterBarang = null;
+                break;
+            case "Master Dokter":
+                listMasterDokter = null;
+                break;
+            case "Master Pasien":
+                listMasterPasien = null;
+                break;
+            case "Master Beautician":
+                listMasterBeautician = null;
+                break;
+            case "Penjualan":
+                listPenjualan = null;
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -242,6 +272,14 @@ public class List extends javax.swing.JFrame {
                     tambahMasterPasien.toFront();
                 }
                 break;
+            case "Master Beautician":
+                if (tambahMasterBeautician == null) {
+                    tambahMasterBeautician = new MasterBeautician();
+                } else {
+                    tambahMasterBeautician.setState(NORMAL);
+                    tambahMasterBeautician.toFront();
+                }
+                break;
             case "Penjualan":
                 if (tambahPenjualan == null) {
                     tambahPenjualan = new Penjualan();
@@ -271,6 +309,9 @@ public class List extends javax.swing.JFrame {
                     break;
                 case "Master Pasien":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmpasien` WHERE `IdPasien` = " + jcomCari1.GetIDTable(), "Pasien", this);
+                    break;
+                case "Master Beautician":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmbeautician` WHERE `IdBeautician` = " + jcomCari1.GetIDTable(), "Beautician", this);
                     break;
                 case "Penjualan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbpenjualan` WHERE `IdPenjualan` = " + jcomCari1.GetIDTable(), "Penjualan", this);
@@ -313,6 +354,14 @@ public class List extends javax.swing.JFrame {
                     ubahMasterPasien.toFront();
                 }
                     break;
+                case "Master Beautician":
+                if (ubahMasterBeautician == null) {
+                    ubahMasterBeautician = new MasterBeautician(jcomCari1.GetIDTable());
+                } else {
+                    ubahMasterBeautician.setState(NORMAL);
+                    ubahMasterBeautician.toFront();
+                }
+                    break;
                 case "Penjualan":
                 if (ubahPenjualan == null) {
                     ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
@@ -341,6 +390,10 @@ public class List extends javax.swing.JFrame {
             case "Master Pasien":
                 jcomCari1.setQuery("SELECT `IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', `JenisKelamin` as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpasien` WHERE 1");
                 jcomCari1.setOrder(" ORDER BY `NamaPasien` ");
+                break;
+            case "Master Beautician":
+                jcomCari1.setQuery("SELECT `IdBeautician` as 'ID', `NamaBeautician` as 'Nama Beautician', `NoTelepon` as 'No Telpon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmbeautician` WHERE 1 ");
+                jcomCari1.setOrder(" ORDER BY `NamaBeautician` ");
                 break;
             case "Penjualan":
                 jcomCari1.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");

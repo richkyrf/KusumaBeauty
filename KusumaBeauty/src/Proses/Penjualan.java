@@ -1050,6 +1050,7 @@ public class Penjualan extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
+                    Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualan`(`NoTransaksi`, `Tanggal`, `IdPasien`, `Keterangan`) VALUES ('" + JTNoTransaksi.getText() + "','" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',(SELECT `IdPasien` FROM `tbmpasien` WHERE `NamaPasien` = '" + JCPasien.getSelectedItem() + "'),'" + JTAKeterangan.getText() + "')", null);
                     if (Berhasil) {
                         for (int i = 0; i < JTable.getRowCount(); i++) {
                             Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualandetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);

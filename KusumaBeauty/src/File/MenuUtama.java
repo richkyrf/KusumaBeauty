@@ -45,6 +45,7 @@ public class MenuUtama extends javax.swing.JFrame {
         JMIMasterKaryawan = new javax.swing.JMenuItem();
         JMIMasterKendaraan = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         JMProses = new javax.swing.JMenu();
         JMIProsesAbsenKaryawan = new javax.swing.JMenuItem();
         JMIProsesPacking = new javax.swing.JMenuItem();
@@ -126,6 +127,14 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMMaster.add(jMenuItem1);
 
+        jMenuItem2.setText("4. Master Beautician");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        JMMaster.add(jMenuItem2);
+
         JMenuBar.add(JMMaster);
 
         JMProses.setText("Proses");
@@ -158,7 +167,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMList.add(JMIListPacking);
 
-        JMIListPenjualan.setText("3. List Perawatan");
+        JMIListPenjualan.setText("2. List Perawatan");
         JMIListPenjualan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMIListPenjualanActionPerformed(evt);
@@ -266,6 +275,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMIProsesAbsenKaryawanActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if (listMasterBeautician == null) {
+            listMasterBeautician = new List("Master Beautician");
+        } else {
+            listMasterBeautician.setState(NORMAL);
+            listMasterBeautician.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -320,5 +338,6 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuBar JMenuBar;
     private javax.swing.JPopupMenu.Separator SFile;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
