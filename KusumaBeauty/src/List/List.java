@@ -46,6 +46,9 @@ public class List extends javax.swing.JFrame {
             case "Master Beautician":
                 setTitle("List Master Beautician");
                 break;
+            case "Master Tindakan":
+                setTitle("List Master Tindakan");
+                break;
             case "Penjualan":
                 setTitle("List Penjualan");
                 break;
@@ -220,6 +223,9 @@ public class List extends javax.swing.JFrame {
             case "Master Beautician":
                 listMasterBeautician = null;
                 break;
+            case "Master Tindakan":
+                listMasterTindakan = null;
+                break;
             case "Penjualan":
                 listPenjualan = null;
                 break;
@@ -316,6 +322,14 @@ public class List extends javax.swing.JFrame {
                 } else {
                     tambahMasterBeautician.setState(NORMAL);
                     tambahMasterBeautician.toFront();
+                }
+                break;
+            case "Master Tindakan":
+                if (tambahMasterTindakan == null) {
+                    tambahMasterTindakan = new MasterTindakan();
+                } else {
+                    tambahMasterTindakan.setState(NORMAL);
+                    tambahMasterTindakan.toFront();
                 }
                 break;
             case "Penjualan":

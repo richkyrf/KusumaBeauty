@@ -28,7 +28,7 @@ public class Var {
     public static MasterPasien tambahMasterPasien, ubahMasterPasien;
     public static MasterBeautician tambahMasterBeautician, ubahMasterBeautician;
 
-    public static List listMasterBarang, listMasterDokter, listMasterPasien, listPenjualan, listMasterBeautician;
+    public static List listMasterBarang, listMasterDokter, listMasterPasien, listPenjualan, listMasterBeautician, listMasterTindakan;
 
     public static Jcari jcari;
     public static Penjualan tambahPenjualan, ubahPenjualan;
