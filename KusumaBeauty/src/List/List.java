@@ -9,7 +9,11 @@ import LSubProces.Delete;
 import Master.*;
 import javax.swing.JOptionPane;
 import static GlobalVar.Var.*;
+import KomponenGUI.FDateF;
+import LSubProces.Insert;
+import static Master.MasterPasien.JCJenisKelamin;
 import Proses.Penjualan;
+import java.util.Date;
 import javax.swing.JFrame;
 
 /**
@@ -27,6 +31,7 @@ public class List extends javax.swing.JFrame {
         Type = type;
         initComponents();
         setVisible(true);
+        JBRegister.setVisible(false);
         switch (Type) {
             case "Master Barang":
                 setTitle("List Master Barang");
@@ -36,6 +41,7 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Master Pasien":
                 setTitle("List Master Pasien");
+                JBRegister.setVisible(true);
                 break;
             case "Master Beautician":
                 setTitle("List Master Beautician");
@@ -54,6 +60,22 @@ public class List extends javax.swing.JFrame {
         }
     }
 
+    void tambahantrian() {
+        String tipe = null;
+        if (GlobalVar.VarL.level.equals("Kasir")) {
+            tipe = "Beli";
+        } else if (GlobalVar.VarL.level.equals("Perawat")) {
+            tipe = "Konsultasi";
+        }
+        Insert insert = new Insert();
+        Boolean berhasil = insert.simpan("INSERT INTO `tbantrian`(`TanggalAntrian`, `NoAntrian`, `IdPasien`, `JenisAntrian`) VALUES ('" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "',[value-3],[value-4],'" + tipe + "')", "Pasien", this);
+        if (berhasil) {
+            if (listMasterPasien != null) {
+                listMasterPasien.load();
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +91,7 @@ public class List extends javax.swing.JFrame {
         jbuttonF4 = new KomponenGUI.JbuttonF();
         jcomCari1 = new KomponenGUI.JcomCari();
         jbuttonF5 = new KomponenGUI.JbuttonF();
+        JBRegister = new KomponenGUI.JbuttonF();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -112,6 +135,13 @@ public class List extends javax.swing.JFrame {
             }
         });
 
+        JBRegister.setText("Register");
+        JBRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBRegisterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,6 +156,8 @@ public class List extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbuttonF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,7 +178,8 @@ public class List extends javax.swing.JFrame {
                     .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbuttonF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbuttonF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -195,6 +228,10 @@ public class List extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosed
 
+    private void JBRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegisterActionPerformed
+
+    }//GEN-LAST:event_JBRegisterActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +270,7 @@ public class List extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private KomponenGUI.JbuttonF JBRegister;
     private KomponenGUI.JbuttonF jbuttonF1;
     private KomponenGUI.JbuttonF jbuttonF2;
     private KomponenGUI.JbuttonF jbuttonF3;
@@ -331,44 +369,44 @@ public class List extends javax.swing.JFrame {
         } else {
             switch (Type) {
                 case "Master Barang":
-                if (ubahMasterBarang == null) {
-                    ubahMasterBarang = new MasterBarang(jcomCari1.GetIDTable());
-                } else {
-                    ubahMasterBarang.setState(NORMAL);
-                    ubahMasterBarang.toFront();
-                }
+                    if (ubahMasterBarang == null) {
+                        ubahMasterBarang = new MasterBarang(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterBarang.setState(NORMAL);
+                        ubahMasterBarang.toFront();
+                    }
                     break;
                 case "Master Dokter":
-                if (ubahMasterDokter == null) {
-                    ubahMasterDokter = new MasterDokter(jcomCari1.GetIDTable());
-                } else {
-                    ubahMasterDokter.setState(NORMAL);
-                    ubahMasterDokter.toFront();
-                }
+                    if (ubahMasterDokter == null) {
+                        ubahMasterDokter = new MasterDokter(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterDokter.setState(NORMAL);
+                        ubahMasterDokter.toFront();
+                    }
                     break;
                 case "Master Pasien":
-                if (ubahMasterPasien == null) {
-                    ubahMasterPasien = new MasterPasien(jcomCari1.GetIDTable());
-                } else {
-                    ubahMasterPasien.setState(NORMAL);
-                    ubahMasterPasien.toFront();
-                }
+                    if (ubahMasterPasien == null) {
+                        ubahMasterPasien = new MasterPasien(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterPasien.setState(NORMAL);
+                        ubahMasterPasien.toFront();
+                    }
                     break;
                 case "Master Beautician":
-                if (ubahMasterBeautician == null) {
-                    ubahMasterBeautician = new MasterBeautician(jcomCari1.GetIDTable());
-                } else {
-                    ubahMasterBeautician.setState(NORMAL);
-                    ubahMasterBeautician.toFront();
-                }
+                    if (ubahMasterBeautician == null) {
+                        ubahMasterBeautician = new MasterBeautician(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterBeautician.setState(NORMAL);
+                        ubahMasterBeautician.toFront();
+                    }
                     break;
                 case "Penjualan":
-                if (ubahPenjualan == null) {
-                    ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
-                } else {
-                    ubahPenjualan.setState(NORMAL);
-                    ubahPenjualan.toFront();
-                }
+                    if (ubahPenjualan == null) {
+                        ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
+                    } else {
+                        ubahPenjualan.setState(NORMAL);
+                        ubahPenjualan.toFront();
+                    }
                     break;
                 default:
                     throw new AssertionError();
