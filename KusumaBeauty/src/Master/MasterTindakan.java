@@ -42,7 +42,7 @@ public class MasterTindakan extends javax.swing.JFrame {
         IdEdit = idEdit.toString();
         initComponents();
         setVisible(true);
-        setTitle("Ubah Master Dokter");
+        setTitle("Ubah Master Tindakan");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jbuttonF1.setVisible(false);
@@ -52,22 +52,23 @@ public class MasterTindakan extends javax.swing.JFrame {
 
     void loadeditdata() {
         DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.setQuery("SELECT `IdTindakan` as 'ID', `NamaTindakan` as 'Nama Tindakan', `TipeTindakan` as 'Tipe Kendaraan', `Harga`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmdokter` WHERE `IdDokter` = " + IdEdit);
+        dRunSelctOne.setQuery("SELECT `IdTindakan` as 'ID', `NamaTindakan` as 'Nama Tindakan', IFNULL(`TipeTindakan`,'') as 'Tipe', `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmtindakan`a LEFT JOIN `tbsmtipetindakan`b ON a.`IdTipeTindakan`=b.`IdTipeTindakan` WHERE `IdTindakan` = " + IdEdit);
         ArrayList<String> list = dRunSelctOne.excute();
-        JTNamaBarang.setText(list.get(1));
-        JTNoTelpon.setText(list.get(2));
-        JTAlamat.setText(list.get(3));
+        JTNamaTindakan.setText(list.get(1));
+        JCTipeTindakan.setSelectedItem(list.get(2));
+        JTHarga.setText(list.get(3));
         JTAKeterangan.setText(list.get(4));
+        JCBStatus.setSelected(list.get(5).equals("Aktif"));
     }
 
     Boolean checkInput() {
-        if (JTNamaBarang.getText().replace(" ", "").equals("")) {
+        if (JTNamaTindakan.getText().replace(" ", "").equals("")) {
             JOptionPane.showMessageDialog(null, "Nama Tidak Boleh Kosong");
-            JTNamaBarang.requestFocus();
+            JTNamaTindakan.requestFocus();
             return false;
-        } else if (JTNoTelpon.getText().replace(" ", "").equals("")) {
-            JOptionPane.showMessageDialog(null, "No. Telpon Tidak Boleh Kosong");
-            JTNoTelpon.requestFocus();
+        } else if (JTHarga.getText().replace(" ", "").equals("")) {
+            JOptionPane.showMessageDialog(null, "Harga Tidak Boleh Kosong");
+            JTHarga.requestFocus();
             return false;
         }
         return true;
@@ -87,7 +88,7 @@ public class MasterTindakan extends javax.swing.JFrame {
         jlableF3 = new KomponenGUI.JlableF();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTAKeterangan = new KomponenGUI.JTextAreaF();
-        JTNamaBarang = new KomponenGUI.JtextF();
+        JTNamaTindakan = new KomponenGUI.JtextF();
         jbuttonF1 = new KomponenGUI.JbuttonF();
         jbuttonF2 = new KomponenGUI.JbuttonF();
         jbuttonF4 = new KomponenGUI.JbuttonF();
@@ -95,13 +96,13 @@ public class MasterTindakan extends javax.swing.JFrame {
         jlableF7 = new KomponenGUI.JlableF();
         jlableF8 = new KomponenGUI.JlableF();
         jbuttonF3 = new KomponenGUI.JbuttonF();
-        jlableF9 = new KomponenGUI.JlableF();
-        jlableF10 = new KomponenGUI.JlableF();
-        JTNoTelpon = new KomponenGUI.JtextF();
-        JTAlamat = new KomponenGUI.JtextF();
         jlableF4 = new KomponenGUI.JlableF();
         jlableF11 = new KomponenGUI.JlableF();
         JCBStatus = new KomponenGUI.JCheckBoxF();
+        jlableF5 = new KomponenGUI.JlableF();
+        jlableF12 = new KomponenGUI.JlableF();
+        JCTipeTindakan = new KomponenGUI.JcomboboxF();
+        JTHarga = new KomponenGUI.JRibuanTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -111,9 +112,9 @@ public class MasterTindakan extends javax.swing.JFrame {
             }
         });
 
-        jlableF1.setText("Nama Dokter");
+        jlableF1.setText("Nama Tindakan");
 
-        jlableF2.setText("No. Telpon");
+        jlableF2.setText("Harga");
 
         jlableF3.setText("Keterangan");
 
@@ -126,9 +127,9 @@ public class MasterTindakan extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(JTAKeterangan);
 
-        JTNamaBarang.addKeyListener(new java.awt.event.KeyAdapter() {
+        JTNamaTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTNamaBarangKeyPressed(evt);
+                JTNamaTindakanKeyPressed(evt);
             }
         });
 
@@ -166,27 +167,28 @@ public class MasterTindakan extends javax.swing.JFrame {
             }
         });
 
-        jlableF9.setText("Alamat");
-
-        jlableF10.setText(":");
-
-        JTNoTelpon.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTNoTelponKeyPressed(evt);
-            }
-        });
-
-        JTAlamat.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTAlamatKeyPressed(evt);
-            }
-        });
-
         jlableF4.setText("Status");
 
         jlableF11.setText(":");
 
         JCBStatus.setText("Aktif");
+
+        jlableF5.setText("Tipe Tindakan");
+
+        jlableF12.setText(":");
+
+        JCTipeTindakan.load("SELECT `TipeTindakan` FROM `tbsmtipetindakan` WHERE 1 ");
+        JCTipeTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JCTipeTindakanKeyPressed(evt);
+            }
+        });
+
+        JTHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTHargaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,37 +196,36 @@ public class MasterTindakan extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jlableF9, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jlableF10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(JTAlamat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlableF2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                .addComponent(jlableF3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlableF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlableF6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlableF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlableF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(JTNamaBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1)
-                                .addComponent(JTNoTelpon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                            .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlableF5, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlableF12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JCTipeTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlableF2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(jlableF3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlableF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlableF6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlableF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlableF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(JTNamaTindakan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(JTHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlableF4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -239,18 +240,18 @@ public class MasterTindakan extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlableF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTNamaTindakan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlableF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlableF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlableF12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCTipeTindakan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlableF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlableF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTNoTelpon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlableF9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlableF10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTHarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -290,11 +291,11 @@ public class MasterTindakan extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jbuttonF4ActionPerformed
 
-    private void JTNamaBarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNamaBarangKeyPressed
+    private void JTNamaTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNamaTindakanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            JTNoTelpon.requestFocus();
+            JCTipeTindakan.requestFocus();
         }
-    }//GEN-LAST:event_JTNamaBarangKeyPressed
+    }//GEN-LAST:event_JTNamaTindakanKeyPressed
 
     private void JTAKeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAKeteranganKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -314,17 +315,17 @@ public class MasterTindakan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosed
 
-    private void JTNoTelponKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoTelponKeyPressed
+    private void JCTipeTindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCTipeTindakanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            JTAlamat.requestFocus();
+            JTHarga.requestFocus();
         }
-    }//GEN-LAST:event_JTNoTelponKeyPressed
+    }//GEN-LAST:event_JCTipeTindakanKeyPressed
 
-    private void JTAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAlamatKeyPressed
+    private void JTHargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTHargaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             JTAKeterangan.requestFocus();
         }
-    }//GEN-LAST:event_JTAlamatKeyPressed
+    }//GEN-LAST:event_JTHargaKeyPressed
 
     /**
      * @param args the command line arguments
@@ -366,43 +367,42 @@ public class MasterTindakan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private KomponenGUI.JCheckBoxF JCBStatus;
+    private KomponenGUI.JcomboboxF JCTipeTindakan;
     private KomponenGUI.JTextAreaF JTAKeterangan;
-    private KomponenGUI.JtextF JTAlamat;
-    private KomponenGUI.JtextF JTNamaBarang;
-    private KomponenGUI.JtextF JTNoTelpon;
+    private KomponenGUI.JRibuanTextField JTHarga;
+    private KomponenGUI.JtextF JTNamaTindakan;
     private javax.swing.JScrollPane jScrollPane1;
     private KomponenGUI.JbuttonF jbuttonF1;
     private KomponenGUI.JbuttonF jbuttonF2;
     private KomponenGUI.JbuttonF jbuttonF3;
     private KomponenGUI.JbuttonF jbuttonF4;
     private KomponenGUI.JlableF jlableF1;
-    private KomponenGUI.JlableF jlableF10;
     private KomponenGUI.JlableF jlableF11;
+    private KomponenGUI.JlableF jlableF12;
     private KomponenGUI.JlableF jlableF2;
     private KomponenGUI.JlableF jlableF3;
     private KomponenGUI.JlableF jlableF4;
+    private KomponenGUI.JlableF jlableF5;
     private KomponenGUI.JlableF jlableF6;
     private KomponenGUI.JlableF jlableF7;
     private KomponenGUI.JlableF jlableF8;
-    private KomponenGUI.JlableF jlableF9;
     // End of variables declaration//GEN-END:variables
 
     void tambahData(Boolean tutup) {
         if (checkInput()) {
             Insert insert = new Insert();
-            Boolean berhasil = insert.simpan("INSERT INTO `tbmdokter`(`NamaDokter`, `NoTelepon`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTNamaBarang.getText() + "','" + JTNoTelpon.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Dokter", this);
+                Boolean berhasil = insert.simpan("INSERT INTO `tbmtindakan`(`NamaTindakan`, `IdTipeTindakan`, `Harga`, `Keterangan`, `Status`) VALUES ('" + JTNamaTindakan.getText() + "',(SELECT `IdTipeTindakan` FROM `tbsmtipetindakan` WHERE `TipeTindakan` = '"+JCTipeTindakan.getSelectedItem()+"'),'" + JTHarga.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Tindakan", this);
             if (berhasil) {
-                if (listMasterDokter != null) {
-                    listMasterDokter.load();
+                if (listMasterTindakan != null) {
+                    listMasterTindakan.load();
                 }
                 if (tutup) {
                     dispose();
                 } else {
-                    JTNamaBarang.setText("");
-                    JTNoTelpon.setText("");
-                    JTAlamat.setText("");
+                    JTNamaTindakan.setText("");
+                    JTHarga.setText("0");
                     JTAKeterangan.setText("");
-                    JTNamaBarang.requestFocus();
+                    JTNamaTindakan.requestFocus();
                 }
             }
         }
@@ -411,11 +411,11 @@ public class MasterTindakan extends javax.swing.JFrame {
     void ubahData() {
         if (checkInput()) {
             Update update = new Update();
-            Boolean berhasil = update.Ubah("UPDATE `tbmdokter` SET `NamaDokter`='" + JTNamaBarang.getText() + "',`NoTelepon`='" + JTNoTelpon.getText() + "',`Alamat`='" + JTAlamat.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdDokter` = " + IdEdit, "Dokter", this);
+            Boolean berhasil = update.Ubah("UPDATE `tbmtindakan` SET `NamaTindakan`='" + JTNamaTindakan.getText() + "',`IdTipeTindakan`=(SELECT `IdTipeTindakan` FROM `tbsmtipetindakan` WHERE `TipeTindakan` = '"+JCTipeTindakan.getSelectedItem()+"'),`Harga`='" + JTHarga.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdTindakan` = " + IdEdit, "Tindakan", this);
             if (berhasil) {
                 dispose();
-                if (listMasterDokter != null) {
-                    listMasterDokter.load();
+                if (listMasterTindakan != null) {
+                    listMasterTindakan.load();
                 }
             }
         }

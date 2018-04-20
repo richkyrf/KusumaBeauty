@@ -58,6 +58,7 @@ public class MasterDokter extends javax.swing.JFrame {
         JTNoTelpon.setText(list.get(2));
         JTAlamat.setText(list.get(3));
         JTAKeterangan.setText(list.get(4));
+        JCBStatus.setSelected(list.get(5).equals("Aktif"));
     }
 
     Boolean checkInput() {

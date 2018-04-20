@@ -365,6 +365,9 @@ public class List extends javax.swing.JFrame {
                 case "Master Beautician":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmbeautician` WHERE `IdBeautician` = " + jcomCari1.GetIDTable(), "Beautician", this);
                     break;
+                case "Master Tindakan":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmtindakan` WHERE `IdTindakan` = " + jcomCari1.GetIDTable(), "Tindakan", this);
+                    break;
                 case "Penjualan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbpenjualan` WHERE `IdPenjualan` = " + jcomCari1.GetIDTable(), "Penjualan", this);
                     break;
@@ -414,6 +417,14 @@ public class List extends javax.swing.JFrame {
                         ubahMasterBeautician.toFront();
                     }
                     break;
+                case "Master Tindakan":
+                    if (ubahMasterTindakan == null) {
+                        ubahMasterTindakan = new MasterTindakan(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterTindakan.setState(NORMAL);
+                        ubahMasterTindakan.toFront();
+                    }
+                    break;
                 case "Penjualan":
                     if (ubahPenjualan == null) {
                         ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
@@ -446,6 +457,10 @@ public class List extends javax.swing.JFrame {
             case "Master Beautician":
                 jcomCari1.setQuery("SELECT `IdBeautician` as 'ID', `NamaBeautician` as 'Nama Beautician', `NoTelepon` as 'No Telpon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmbeautician` WHERE 1 ");
                 jcomCari1.setOrder(" ORDER BY `NamaBeautician` ");
+                break;
+            case "Master Tindakan":
+                jcomCari1.setQuery("SELECT `IdTindakan` as 'ID', `NamaTindakan` as 'Nama Tindakan', IFNULL(`TipeTindakan`,'') as 'Tipe', `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmtindakan`a LEFT JOIN `tbsmtipetindakan`b ON a.`IdTipeTindakan`=b.`IdTipeTindakan` WHERE 1 ");
+                jcomCari1.setOrder(" ORDER BY `NamaTindakan` ");
                 break;
             case "Penjualan":
                 jcomCari1.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");
