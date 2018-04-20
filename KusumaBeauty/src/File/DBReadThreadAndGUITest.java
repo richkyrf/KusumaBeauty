@@ -56,14 +56,9 @@ class DBReaderThread extends Thread {
             Statement statement = con.createStatement();
             while (true) {
                 try {
-                    ResultSet resultSet = statement.executeQuery("select * from tbantrian");
-                    int localCount = 0;
+                    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM `tbantrian` WHERE `Status` = 0");
                     while (resultSet.next()) {
-                        localCount++;
-                    }
-                    if (localCount != count) {
-                        count = localCount;
-                        MenuUtama.jlableF1.setText("Pasien Hari Ini: " + Integer.toString(count));
+                        MenuUtama.jlableF1.setText("Pasien Hari Ini: " + resultSet.getString(1));
                     }
                     TimeUnit.MILLISECONDS.sleep(500);
                 } catch (SQLException e) {
