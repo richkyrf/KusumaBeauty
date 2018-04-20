@@ -10,9 +10,11 @@ import Master.*;
 import javax.swing.JOptionPane;
 import static GlobalVar.Var.*;
 import KomponenGUI.FDateF;
+import LSubProces.DRunSelctOne;
 import LSubProces.Insert;
 import static Master.MasterPasien.JCJenisKelamin;
 import Proses.Penjualan;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
 
@@ -49,6 +51,13 @@ public class List extends javax.swing.JFrame {
             case "Master Tindakan":
                 setTitle("List Master Tindakan");
                 break;
+            case "Antrian":
+                setTitle("List Antrian");
+                jbuttonF5.setVisible(false);
+                break;
+            case "Master Pemasok":
+                setTitle("List Master Pemasok");
+                break;
             case "Penjualan":
                 setTitle("List Penjualan");
                 break;
@@ -63,15 +72,22 @@ public class List extends javax.swing.JFrame {
         }
     }
 
-    void tambahantrian() {
-        String tipe = null;
-        if (GlobalVar.VarL.level.equals("Kasir")) {
-            tipe = "Beli";
-        } else if (GlobalVar.VarL.level.equals("Perawat")) {
-            tipe = "Konsultasi";
+    String getNoAntrian() {
+        String NoAntrian;
+        DRunSelctOne dRunSelctOne = new DRunSelctOne();
+        dRunSelctOne.setQuery("SELECT COUNT(`NoAntrian`), `NoAntrian` FROM `tbantrian` WHERE `TanggalAntrian` = '" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "' ORDER BY `NoAntrian` DESC LIMIT 1 ");
+        ArrayList<String> list = dRunSelctOne.excute();
+        if (!list.get(0).equals("0")) {
+            NoAntrian = String.valueOf(Integer.valueOf(list.get(1)) + 1);
+        } else {
+            NoAntrian = "1";
         }
+        return NoAntrian;
+    }
+
+    void tambahantrian() {
         Insert insert = new Insert();
-        Boolean berhasil = insert.simpan("INSERT INTO `tbantrian`(`TanggalAntrian`, `NoAntrian`, `IdPasien`, `JenisAntrian`) VALUES ('" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "',[value-3],[value-4],'" + tipe + "')", "Pasien", this);
+        Boolean berhasil = insert.simpan("INSERT INTO `tbantrian`(`TanggalAntrian`, `NoAntrian`, `IdPasien`) VALUES ('" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "'," + getNoAntrian() + ",'" + jcomCari1.GetIDTable() + "')", "Antrian", this);
         if (berhasil) {
             if (listMasterPasien != null) {
                 listMasterPasien.load();
@@ -226,6 +242,12 @@ public class List extends javax.swing.JFrame {
             case "Master Tindakan":
                 listMasterTindakan = null;
                 break;
+            case "Antrian":
+                listAntrian = null;
+                break;
+            case "Master Pemasok":
+                listMasterPemasok = null;
+                break;
             case "Penjualan":
                 listPenjualan = null;
                 break;
@@ -332,6 +354,14 @@ public class List extends javax.swing.JFrame {
                     tambahMasterTindakan.toFront();
                 }
                 break;
+            case "Master Pemasok":
+                if (tambahMasterPemasok == null) {
+                    tambahMasterPemasok = new MasterPemasok();
+                } else {
+                    tambahMasterPemasok.setState(NORMAL);
+                    tambahMasterPemasok.toFront();
+                }
+                break;
             case "Penjualan":
                 if (tambahPenjualan == null) {
                     tambahPenjualan = new Penjualan();
@@ -367,6 +397,9 @@ public class List extends javax.swing.JFrame {
                     break;
                 case "Master Tindakan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmtindakan` WHERE `IdTindakan` = " + jcomCari1.GetIDTable(), "Tindakan", this);
+                    break;
+                case "Master Pemasok":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbnoenasok` WHERE `IdPemasok` = " + jcomCari1.GetIDTable(), "Pemasok", this);
                     break;
                 case "Penjualan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbpenjualan` WHERE `IdPenjualan` = " + jcomCari1.GetIDTable(), "Penjualan", this);
@@ -425,6 +458,14 @@ public class List extends javax.swing.JFrame {
                         ubahMasterTindakan.toFront();
                     }
                     break;
+                case "Master Pemasok":
+                    if (ubahMasterPemasok == null) {
+                        ubahMasterPemasok = new MasterPemasok(jcomCari1.GetIDTable());
+                    } else {
+                        ubahMasterPemasok.setState(NORMAL);
+                        ubahMasterPemasok.toFront();
+                    }
+                    break;
                 case "Penjualan":
                     if (ubahPenjualan == null) {
                         ubahPenjualan = new Penjualan(jcomCari1.GetIDTable());
@@ -461,6 +502,10 @@ public class List extends javax.swing.JFrame {
             case "Master Tindakan":
                 jcomCari1.setQuery("SELECT `IdTindakan` as 'ID', `NamaTindakan` as 'Nama Tindakan', IFNULL(`TipeTindakan`,'') as 'Tipe', `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmtindakan`a LEFT JOIN `tbsmtipetindakan`b ON a.`IdTipeTindakan`=b.`IdTipeTindakan` WHERE 1 ");
                 jcomCari1.setOrder(" ORDER BY `NamaTindakan` ");
+                break;
+            case "Master Pemasok":
+                jcomCari1.setQuery("SELECT `IdPemasok` as 'ID', `KodePemasok` as 'Kode Pemasok', `NamaPemasok` as 'Nama Pemasok',  `NoTelepon`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE 1 ");
+                jcomCari1.setOrder(" ORDER BY `NamaPemasok` ");
                 break;
             case "Penjualan":
                 jcomCari1.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");
