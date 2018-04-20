@@ -13,6 +13,7 @@ import KomponenGUI.FDateF;
 import LSubProces.DRunSelctOne;
 import LSubProces.Insert;
 import static Master.MasterPasien.JCJenisKelamin;
+import Proses.BarangMasuk;
 import Proses.Penjualan;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +61,9 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Penjualan":
                 setTitle("List Penjualan");
+                break;
+            case "Barang Masuk":
+                setTitle("List Barang Masuk");
                 break;
             default:
                 throw new AssertionError();
@@ -251,6 +255,9 @@ public class List extends javax.swing.JFrame {
             case "Penjualan":
                 listPenjualan = null;
                 break;
+            case "Barang Masuk":
+                listBarangMasuk = null;
+                break;
             default:
                 throw new AssertionError();
         }
@@ -370,6 +377,14 @@ public class List extends javax.swing.JFrame {
                     tambahPenjualan.toFront();
                 }
                 break;
+            case "Barang Masuk":
+                if (tambahBarangMasuk == null) {
+                    tambahBarangMasuk = new BarangMasuk();
+                } else {
+                    tambahBarangMasuk.setState(NORMAL);
+                    tambahBarangMasuk.toFront();
+                }
+                break;
             default:
                 throw new AssertionError();
         }
@@ -403,6 +418,9 @@ public class List extends javax.swing.JFrame {
                     break;
                 case "Penjualan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbpenjualan` WHERE `IdPenjualan` = " + jcomCari1.GetIDTable(), "Penjualan", this);
+                    break;
+                case "Barang Masuk":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbbarangmasuk` WHERE `IdBarangMasuk` = " + jcomCari1.GetIDTable(), "Barang Masuk", this);
                     break;
                 default:
                     throw new AssertionError();
@@ -474,6 +492,14 @@ public class List extends javax.swing.JFrame {
                         ubahPenjualan.toFront();
                     }
                     break;
+                case "Barang Masuk":
+                    if (ubahBarangMasuk == null) {
+                        ubahBarangMasuk = new BarangMasuk(jcomCari1.GetIDTable());
+                    } else {
+                        ubahBarangMasuk.setState(NORMAL);
+                        ubahBarangMasuk.toFront();
+                    }
+                    break;
                 default:
                     throw new AssertionError();
             }
@@ -509,6 +535,10 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Penjualan":
                 jcomCari1.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");
+                jcomCari1.setOrder(" ORDER BY `NoTransaksi` DESC ");
+                break;
+            case "Barang Masuk":
+                jcomCari1.setQuery("SELECT `IdBarangMasuk` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPemasok`,'-') as 'Nama Pemasok', a.`Keterangan` FROM `tbbarangmasuk`a LEFT JOIN `tbmpemasok`b ON a.`IdPemasok`=b.`IdPemasok` WHERE 1");
                 jcomCari1.setOrder(" ORDER BY `NoTransaksi` DESC ");
                 break;
             default:
