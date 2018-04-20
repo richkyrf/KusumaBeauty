@@ -58,6 +58,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         JMProses = new javax.swing.JMenu();
         JMIProsesAbsenKaryawan = new javax.swing.JMenuItem();
         JMIProsesPacking = new javax.swing.JMenuItem();
@@ -181,6 +182,14 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         JMMaster.add(jMenuItem3);
+
+        jMenuItem4.setText("6. Master Pemasok");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        JMMaster.add(jMenuItem4);
 
         JMenuBar.add(JMMaster);
 
@@ -346,6 +355,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if (listMasterPemasok == null) {
+            listMasterPemasok = new List("Master Pemasok");
+        } else {
+            listMasterPemasok.setState(NORMAL);
+            listMasterPemasok.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,6 +420,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
     public static KomponenGUI.JlableF jlableF1;
