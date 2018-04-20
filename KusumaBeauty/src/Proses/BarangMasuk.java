@@ -67,7 +67,7 @@ public class BarangMasuk extends javax.swing.JFrame {
     public BarangMasuk() {
         initComponents();
         setVisible(true);
-        setTitle("Tambah Penjualan");
+        setTitle("Tambah Barang");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jbuttonF3.setVisible(false);
@@ -80,7 +80,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         IdEdit = idEdit.toString();
         initComponents();
         setVisible(true);
-        setTitle("Ubah Penjualan");
+        setTitle("Ubah Barang");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jbuttonF1.setVisible(false);
@@ -101,8 +101,8 @@ public class BarangMasuk extends javax.swing.JFrame {
 
     void loadeditdata() {
         DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.seterorm("Eror gagal Menampilkan Data Penjualan");
-        dRunSelctOne.setQuery("SELECT `IdPenjualan` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPasien`,'-') as 'Nama Pasien', a.`Keterangan` FROM `tbpenjualan`a LEFT JOIN `tbmpasien`b ON a.`IdPasien`=b.`IdPasien` WHERE `IdPenjualan` = '" + IdEdit + "'");
+        dRunSelctOne.seterorm("Eror gagal Menampilkan Data Barang Masuk");
+        dRunSelctOne.setQuery("SELECT `IdBarangMasuk` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPemasok`,'-') as 'Nama Pemasok', a.`Keterangan` FROM `tbbarangmasuk`a LEFT JOIN `tbmpemasok`b ON a.`IdPemasok`=b.`IdPemasok` WHERE `IdBarangMasuk` = '" + IdEdit + "'");
         ArrayList<String> list = dRunSelctOne.excute();
         JTNoTransaksi.setText(list.get(1));
         JDTanggal.setDate(FDateF.strtodate(list.get(2), "dd-MM-yyyy"));
@@ -111,7 +111,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) JTable.getModel();
         model.getDataVector().removeAllElements();
         RunSelct runSelct = new RunSelct();
-        runSelct.setQuery("SELECT `IdPenjualanDetail`, `NoTransaksi`, `NoKolom`, `NamaBarang`, FORMAT(`Jumlah`,0) as 'Jumlah', FORMAT(a.`Harga`,0) as 'Harga', FORMAT(`Jumlah`*a.`Harga`,0) as 'Sub Total' FROM `tbpenjualandetail`a JOIN `tbmbarang`b ON a.`IdBarang`=b.`IdBarang` WHERE `NoTransaksi` = '" + list.get(1) + "'");
+        runSelct.setQuery("SELECT `IdBarangMasukDetail`, `NoTransaksi`, `NoKolom`, `NamaBarang`, FORMAT(`Jumlah`,0) as 'Jumlah', FORMAT(a.`Harga`,0) as 'Harga', FORMAT(`Jumlah`*a.`Harga`,0) as 'Sub Total' FROM `tbbarangmasukdetail`a JOIN `tbmbarang`b ON a.`IdBarang`=b.`IdBarang` WHERE `NoTransaksi` = '" + list.get(1) + "'");
         try {
             ResultSet rs = runSelct.excute();
             int row = 0;
@@ -149,7 +149,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         NumberFormat nf = new DecimalFormat("000000");
         String NoTransaksi = null;
         RunSelct runSelct = new RunSelct();
-        runSelct.setQuery("SELECT `NoTransaksi` FROM `tbpenjualan` ORDER BY `NoTransaksi` DESC LIMIT 1");
+        runSelct.setQuery("SELECT `NoTransaksi` FROM `tbbarangmasuk` ORDER BY `NoTransaksi` DESC LIMIT 1");
         try {
             ResultSet rs = runSelct.excute();
             if (!rs.isBeforeFirst()) {
@@ -1032,10 +1032,10 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
-                    Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualan`(`NoTransaksi`, `Tanggal`, `IdPasien`, `Keterangan`) VALUES ('" + JTNoTransaksi.getText() + "','" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',(SELECT `IdPasien` FROM `tbmpasien` WHERE `NamaPasien` = '" + JCPasien.getSelectedItem() + "'),'" + JTAKeterangan.getText() + "')", null);
+                    Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasuk`(`NoTransaksi`, `Tanggal`, `IdPemasok`, `Keterangan`) VALUES ('" + JTNoTransaksi.getText() + "','" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPasien.getSelectedItem() + "'),'" + JTAKeterangan.getText() + "')", null);
                     if (Berhasil) {
                         for (int i = 0; i < JTable.getRowCount(); i++) {
-                            Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualandetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
+                            Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasukdetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
                         }
                     }
                 }
@@ -1084,12 +1084,12 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
-                    Berhasil = multiInsert.Excute("UPDATE `tbpenjualan` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPasien`=(SELECT `IdPasien` FROM `tbmpasien` WHERE `NamaPasien` = '" + JCPasien.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdPenjualan` = '" + IdEdit + "'", null);
+                    Berhasil = multiInsert.Excute("UPDATE `tbbarangmasuk` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPemasok`=(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPasien.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdBarangMasuk` = '" + IdEdit + "'", null);
                     if (Berhasil) {
-                        Berhasil = multiInsert.Excute("DELETE FROM `tbpenjualandetail` WHERE `NoTransaksi` = '" + JTNoTransaksi.getText() + "'", null);
+                        Berhasil = multiInsert.Excute("DELETE FROM `tbbarangmasukdetail` WHERE `NoTransaksi` = '" + JTNoTransaksi.getText() + "'", null);
                         if (Berhasil) {
                             for (int i = 0; i < JTable.getRowCount(); i++) {
-                                Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualandetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
+                                Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasukdetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
                             }
                         }
                     }
