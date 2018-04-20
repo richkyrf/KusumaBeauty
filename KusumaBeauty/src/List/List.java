@@ -504,7 +504,7 @@ public class List extends javax.swing.JFrame {
                 jcomCari1.setOrder(" ORDER BY `NamaTindakan` ");
                 break;
             case "Master Pemasok":
-                jcomCari1.setQuery("SELECT `IdPemasok` as 'ID', `KodePemasok` as 'Kode Pemasok', `NamaPemasok` as 'Nama Pemasok',  `NoTelepon`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE 1 ");
+                jcomCari1.setQuery("SELECT `IdPemasok` as 'ID', `KodePemasok` as 'Kode Pemasok', `NamaPemasok` as 'Nama Pemasok',  `NoTelpon`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE 1 ");
                 jcomCari1.setOrder(" ORDER BY `NamaPemasok` ");
                 break;
             case "Penjualan":
