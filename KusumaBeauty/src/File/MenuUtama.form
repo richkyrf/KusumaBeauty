@@ -28,9 +28,6 @@
                   <Connection code="&quot;Reset Password User&quot;" type="code"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMIResetPasswordUserActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if (!GlobalVar.VarL.level.equals(&quot;Administrator&quot;)) {&#xa;    JMIResetPasswordUser.setVisible(false);&#xa;    SFile.setVisible(false);&#xa;}"/>
               </AuxValues>
