@@ -1036,9 +1036,7 @@ public class BarangMasuk extends javax.swing.JFrame {
                     JTAKeterangan.setText("");
                     JTable.setModel(new javax.swing.table.DefaultTableModel(
                             new Object[][]{},
-                            new String[]{
-                                "No", "Nama Barang", "Jumlah", "Harga Satuan", "Sub Total"
-                            }
+                            new String[]{"No", "Nama Barang", "Jumlah", "Harga Satuan", "Sub Total"}
                     ));
                     RefreshTbl();
                     JTable.getColumnModel().getColumn(0).setPreferredWidth(50);
