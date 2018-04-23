@@ -317,9 +317,6 @@ public class Penjualan extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
         });
 
         LBNoTransaksi.setText("No. Transaksi");
@@ -331,11 +328,6 @@ public class Penjualan extends javax.swing.JFrame {
         jlableF3.setText("Keterangan");
 
         JTNoTransaksi.setEnabled(false);
-        JTNoTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTNoTransaksiKeyPressed(evt);
-            }
-        });
 
         jbuttonF1.setText("Tambah");
         jbuttonF1.addActionListener(new java.awt.event.ActionListener() {
@@ -375,11 +367,6 @@ public class Penjualan extends javax.swing.JFrame {
 
         JDTanggal.setDate(new Date());
         JDTanggal.setDateFormatString("dd-MM-yyyy");
-        JDTanggal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JDTanggalKeyPressed(evt);
-            }
-        });
 
         jlableF23.setText("Tanggal");
 
@@ -779,18 +766,6 @@ public class Penjualan extends javax.swing.JFrame {
     private void jbuttonF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF4ActionPerformed
         dispose();
     }//GEN-LAST:event_jbuttonF4ActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
-    }//GEN-LAST:event_formWindowClosing
-
-    private void JTNoTransaksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoTransaksiKeyPressed
-
-    }//GEN-LAST:event_JTNoTransaksiKeyPressed
-
-    private void JDTanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JDTanggalKeyPressed
-
-    }//GEN-LAST:event_JDTanggalKeyPressed
 
     private void tambahtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahtableActionPerformed
         TambahTabel();

@@ -11,7 +11,6 @@
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -267,9 +266,6 @@
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTNoTransaksiKeyPressed"/>
-      </Events>
     </Component>
     <Component class="KomponenGUI.JbuttonF" name="jbuttonF1">
       <Properties>
@@ -330,9 +326,6 @@
         </Property>
         <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JDTanggalKeyPressed"/>
-      </Events>
     </Component>
     <Component class="KomponenGUI.JlableF" name="jlableF23">
       <Properties>
