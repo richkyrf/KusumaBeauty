@@ -183,13 +183,15 @@
                   <Component id="jlabelF10" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="8" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="JTHargaSatuan" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JTSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JTNamaBarang" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JTStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="JTJumlah" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="JBSearchNamaBarang" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JTHargaSatuan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTNamaBarang" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTStock" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="JTJumlah" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -516,7 +518,7 @@
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JCPasienKeyPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JCPasien.load(&quot;SELECT &apos;-&apos; as &apos;NamaPasien&apos; UNION ALL SELECT `NamaPasien` FROM `tbmpasien` &quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JCPasien.load(&quot;SELECT &apos;-&apos; as &apos;NamaPemasok&apos; UNION ALL SELECT `NamaPemasok` FROM `tbmpemasok` &quot;);"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>
