@@ -56,7 +56,7 @@ public class LogEror {
         try {
             CodeSource codeSource = LogEror.class.getProtectionDomain().getCodeSource();
             File jarFile = new File(codeSource.getLocation().toURI().getPath());
-            jarDir = jarFile.getParentFile().getPath() + "\\";
+//            jarDir = jarFile.getParentFile().getPath() + "\\";
         } catch (URISyntaxException e) {
             //System.out.println("Eror.LogEror.geturljar()" + e);
         }
