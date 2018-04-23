@@ -66,7 +66,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         JMList = new javax.swing.JMenu();
         JMIListPacking = new javax.swing.JMenuItem();
-        JMIListPenjualan = new javax.swing.JMenuItem();
+        JMIListPerawatan = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         JMLaporan = new javax.swing.JMenu();
 
@@ -241,13 +241,13 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMList.add(JMIListPacking);
 
-        JMIListPenjualan.setText("2. List Perawatan");
-        JMIListPenjualan.addActionListener(new java.awt.event.ActionListener() {
+        JMIListPerawatan.setText("2. List Perawatan");
+        JMIListPerawatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JMIListPenjualanActionPerformed(evt);
+                JMIListPerawatanActionPerformed(evt);
             }
         });
-        JMList.add(JMIListPenjualan);
+        JMList.add(JMIListPerawatan);
 
         jMenuItem6.setText("3. List Barang");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -328,9 +328,9 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMIListPackingActionPerformed
 
-    private void JMIListPenjualanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListPenjualanActionPerformed
+    private void JMIListPerawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIListPerawatanActionPerformed
 
-    }//GEN-LAST:event_JMIListPenjualanActionPerformed
+    }//GEN-LAST:event_JMIListPerawatanActionPerformed
 
     private void JMIMasterKendaraanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIMasterKendaraanActionPerformed
         if (listMasterBarang == null) {
@@ -467,7 +467,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem JMIExit;
     private javax.swing.JMenuItem JMIGantiPassword;
     private javax.swing.JMenuItem JMIListPacking;
-    private javax.swing.JMenuItem JMIListPenjualan;
+    private javax.swing.JMenuItem JMIListPerawatan;
     private javax.swing.JMenuItem JMIMasterKaryawan;
     private javax.swing.JMenuItem JMIMasterKendaraan;
     private javax.swing.JMenuItem JMIProsesAbsenKaryawan;
