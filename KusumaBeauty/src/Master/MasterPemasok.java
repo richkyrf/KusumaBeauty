@@ -52,7 +52,7 @@ public class MasterPemasok extends javax.swing.JFrame {
 
     void loadeditdata() {
         DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.setQuery("SELECT `IdPemasok` as 'ID', `NamaPemasok` as 'Nama Pemasok', `NoTelpon` as 'No Telpon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE `IdPemasok` = " + IdEdit);        ArrayList<String> list = dRunSelctOne.excute();
+        dRunSelctOne.setQuery("SELECT `IdPemasok` as 'ID', `NamaPemasok` as 'Nama Pemasok', `NoTelpon` as 'No Telepon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE `IdPemasok` = " + IdEdit);        ArrayList<String> list = dRunSelctOne.excute();
         JTNamaBarang.setText(list.get(1));
         JTNoTelpon.setText(list.get(2));
         JTAlamat.setText(list.get(3));
@@ -394,10 +394,10 @@ public class MasterPemasok extends javax.swing.JFrame {
     void tambahData(Boolean tutup) {
         if (checkInput()) {
             Insert insert = new Insert();
-            Boolean berhasil = insert.simpan("INSERT INTO `tbmpemasok`(`NamaPemasok`, `NoTelepon`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTNamaBarang.getText() + "','" + JTNoTelpon.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Dokter", this);
+            Boolean berhasil = insert.simpan("INSERT INTO `tbmpemasok`(`NamaPemasok`, `NoTelpon`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTNamaBarang.getText() + "','" + JTNoTelpon.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Dokter", this);
             if (berhasil) {
-                if (listMasterDokter != null) {
-                    listMasterDokter.load();
+                if (listMasterPemasok != null) {
+                    listMasterPemasok.load();
                 }
                 if (tutup) {
                     dispose();
@@ -418,8 +418,8 @@ public class MasterPemasok extends javax.swing.JFrame {
             Boolean berhasil = update.Ubah("UPDATE `tbmPemasok` SET `NamaPemasok`='" + JTNamaBarang.getText() + "',`NoTelpon`='" + JTNoTelpon.getText() + "',`Alamat`='" + JTAlamat.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdPemasok` = " + IdEdit, "Dokter", this);
             if (berhasil) {
                 dispose();
-                if (listMasterDokter != null) {
-                    listMasterDokter.load();
+                if (listMasterPemasok != null) {
+                    listMasterPemasok.load();
                 }
             }
         }

@@ -3,9 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/KusumaBeauty/KusumaBeauty/src/File/MenuUtama.java</file>
-            <file>file:/E:/KusumaBeauty/KusumaBeauty/src/File/DBReadThreadAndGUITest.java</file>
-            <file>file:/E:/KusumaBeauty/KusumaBeauty/src/List/List.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/File/TambahUser.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/List/List.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Proses/BarangMasuk.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Proses/Jcari.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/File/MenuUtama.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/File/Login.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Master/MasterBarang.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Master/MasterBeautician.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Master/MasterPemasok.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/GlobalVar/Var.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Master/MasterDokter.java</file>
+            <file>file:/Users/christian/Documents/GitHub/KusumaBeauty/KusumaBeauty/src/Proses/Penjualan.java</file>
         </group>
     </open-files>
 </project-private>

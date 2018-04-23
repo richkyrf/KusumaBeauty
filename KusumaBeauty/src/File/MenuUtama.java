@@ -62,6 +62,7 @@ public class MenuUtama extends javax.swing.JFrame {
         JMProses = new javax.swing.JMenu();
         JMIProsesAbsenKaryawan = new javax.swing.JMenuItem();
         JMIProsesPacking = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         JMList = new javax.swing.JMenu();
         JMIListPacking = new javax.swing.JMenuItem();
         JMIListPenjualan = new javax.swing.JMenuItem();
@@ -205,6 +206,14 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         JMProses.add(JMIProsesPacking);
+
+        jMenuItem5.setText("3. Barang Masuk");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        JMProses.add(jMenuItem5);
 
         JMenuBar.add(JMProses);
 
@@ -355,6 +364,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        if (tambahBarangMasuk == null) {
+            tambahBarangMasuk = new BarangMasuk();
+        } else {
+            tambahBarangMasuk.setState(NORMAL);
+            tambahBarangMasuk.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -412,6 +430,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
     public static KomponenGUI.JlableF jlableF1;
