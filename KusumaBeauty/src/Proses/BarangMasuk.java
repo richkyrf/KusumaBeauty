@@ -502,7 +502,7 @@ public class BarangMasuk extends javax.swing.JFrame {
 
         JTSubTotal.setEnabled(false);
 
-        JCPemasok.load("SELECT '-' as 'NamaPemasok' UNION ALL SELECT `NamaPemasok` FROM `tbmpemasok` ");
+        JCPemasok.load("SELECT `NamaPemasok` FROM `tbmpemasok` ORDER BY `NamaPemasok` ASC ");
         JCPemasok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 JCPemasokKeyPressed(evt);
