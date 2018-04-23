@@ -17,8 +17,8 @@ public class DBReadThreadAndGUITest {
         GUIThread gui = new GUIThread();
         gui.start();
 
-        //DBReaderThread dbReader = new DBReaderThread(gui);
-        //dbReader.start();
+        DBReaderThread dbReader = new DBReaderThread(gui);
+        dbReader.start();
     }
 
     public static void main(String[] args) {

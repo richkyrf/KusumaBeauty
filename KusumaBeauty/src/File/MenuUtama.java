@@ -390,7 +390,6 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-<<<<<<< HEAD
     private void jbuttonF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF2ActionPerformed
         if (listMasterPasien == null) {
             listMasterPasien = new List("Master Pasien");
@@ -408,7 +407,7 @@ public class MenuUtama extends javax.swing.JFrame {
             listAntrian.toFront();
         }
     }//GEN-LAST:event_jbuttonF1ActionPerformed
-=======
+
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         if (tambahBarangMasuk == null) {
             tambahBarangMasuk = new BarangMasuk();
@@ -426,7 +425,7 @@ public class MenuUtama extends javax.swing.JFrame {
             listBarangMasuk.toFront();
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
->>>>>>> 1bb64f29266e9260e28c9ef7fddf1fd2455e9861
+
 
     /**
      * @param args the command line arguments
