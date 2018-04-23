@@ -26,17 +26,23 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jcomCari1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jcomCari1" pref="780" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                      <Component id="jbuttonF4" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlableF1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jtextF1" min="-2" pref="350" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="jbuttonF4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="602" max="32767" attributes="0"/>
                       <Component id="JBRegister" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JBRefresh" min="-2" max="-2" attributes="0"/>
@@ -56,8 +62,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jcomCari1" pref="541" max="32767" attributes="0"/>
+              <Component id="jcomCari1" pref="495" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlableF1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtextF1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="JBUbah" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="JBHapus" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -104,8 +115,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbuttonF4ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="KomponenGUI.JcomCari" name="jcomCari1">
-    </Component>
     <Component class="KomponenGUI.JbuttonF" name="JBTambah">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tambah"/>
@@ -120,6 +129,18 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBRegisterActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="KomponenGUI.JcomCari" name="jcomCari1">
+    </Component>
+    <Component class="KomponenGUI.JlableF" name="jlableF1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pencarian :"/>
+      </Properties>
+    </Component>
+    <Component class="KomponenGUI.JtextF" name="jtextF1">
+      <Events>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtextF1KeyReleased"/>
       </Events>
     </Component>
   </SubComponents>

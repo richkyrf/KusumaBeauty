@@ -53,14 +53,16 @@ public class JtableF extends JTable {
 
     public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
         Component comp = super.prepareRenderer(renderer, row, col);
-        if (getModel().getValueAt(row, getColumnCount()-1).equals("Antri")) {
-            comp.setBackground(Color.pink);
-        } else if (isRowSelected(row)){
-            comp.setBackground(Color.gray);
-            comp.setForeground(Color.white);
-        } else {
-            comp.setBackground(Color.white);
-            comp.setForeground(Color.black);
+        if (usecolor) {
+            if (getModel().getValueAt(row, getColumnCount() - 1).equals("Antri")) {
+                comp.setBackground(Color.pink);
+            } else if (isRowSelected(row)) {
+                comp.setBackground(Color.gray);
+                comp.setForeground(Color.white);
+            } else {
+                comp.setBackground(Color.white);
+                comp.setForeground(Color.black);
+            }
         }
         return comp;
     }
@@ -187,7 +189,7 @@ public class JtableF extends JTable {
             for (int column = 0; column < getColumnCount(); column++) {
                 TableColumn tableColumn = getColumnModel().getColumn(column);
                 int preferredWidth = 50;
-                int maxWidth = 275;
+                int maxWidth = 200;
 
                 for (int row = 0; row < getRowCount(); row++) {
                     TableCellRenderer cellRenderer = getCellRenderer(row, column);
