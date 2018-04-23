@@ -11,7 +11,6 @@
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -78,7 +77,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jlableF22" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="JCPasien" max="32767" attributes="0"/>
+                              <Component id="JCPemasok" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jbuttonF7" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -88,10 +87,10 @@
                                   <Component id="jlabelF7" alignment="0" max="32767" attributes="0"/>
                                   <Component id="JTNamaBarang" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="JBSearchNamaBarang" min="-2" pref="45" max="-2" attributes="0"/>
-                                  <Component id="jbuttonF11" max="32767" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jbuttonF11" min="-2" max="-2" attributes="0"/>
+                                  <Component id="JBSearchNamaBarang" alignment="0" min="-2" pref="45" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -152,7 +151,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jlableF21" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jlableF22" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JCPasien" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="JCPemasok" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbuttonF7" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -185,6 +184,7 @@
               </Group>
               <EmptySpace pref="8" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="JBSearchNamaBarang" alignment="1" min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="JTHargaSatuan" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -192,7 +192,6 @@
                       <Component id="JTStock" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="JTJumlah" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="JBSearchNamaBarang" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -267,9 +266,6 @@
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JTNoTransaksiKeyPressed"/>
-      </Events>
     </Component>
     <Component class="KomponenGUI.JbuttonF" name="jbuttonF1">
       <Properties>
@@ -315,7 +311,7 @@
     </Component>
     <Component class="KomponenGUI.JlableF" name="jlableF21">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pasien"/>
+        <Property name="text" type="java.lang.String" value="Pemasok"/>
       </Properties>
     </Component>
     <Component class="KomponenGUI.JlableF" name="jlableF22">
@@ -330,9 +326,6 @@
         </Property>
         <Property name="dateFormatString" type="java.lang.String" value="dd-MM-yyyy"/>
       </Properties>
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JDTanggalKeyPressed"/>
-      </Events>
     </Component>
     <Component class="KomponenGUI.JlableF" name="jlableF23">
       <Properties>
@@ -520,12 +513,12 @@
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
-    <Component class="KomponenGUI.JcomboboxF" name="JCPasien">
+    <Component class="KomponenGUI.JcomboboxF" name="JCPemasok">
       <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JCPasienKeyPressed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="JCPemasokKeyPressed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JCPasien.load(&quot;SELECT &apos;-&apos; as &apos;NamaPasien&apos; UNION ALL SELECT `NamaPasien` FROM `tbmpasien` &quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JCPemasok.load(&quot;SELECT &apos;-&apos; as &apos;NamaPemasok&apos; UNION ALL SELECT `NamaPemasok` FROM `tbmpemasok` &quot;);"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
     </Component>

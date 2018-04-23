@@ -72,8 +72,8 @@ public class BarangMasuk extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jbuttonF3.setVisible(false);
         jbuttonF9.setVisible(false);
-        JCPasien.requestFocus();
-        JTNoTransaksi.setText(getNoPenjualan());
+        JCPemasok.requestFocus();
+        JTNoTransaksi.setText(getNoBarangMasuk());
     }
 
     public BarangMasuk(Object idEdit) {
@@ -87,7 +87,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         jbuttonF2.setVisible(false);
         jbuttonF8.setVisible(false);
         loadeditdata();
-        JCPasien.requestFocus();
+        JCPemasok.requestFocus();
     }
 
     void cariBarang(String keywordCari) {
@@ -106,7 +106,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         ArrayList<String> list = dRunSelctOne.excute();
         JTNoTransaksi.setText(list.get(1));
         JDTanggal.setDate(FDateF.strtodate(list.get(2), "dd-MM-yyyy"));
-        JCPasien.setSelectedItem(list.get(3));
+        JCPemasok.setSelectedItem(list.get(3));
         JTAKeterangan.setText(list.get(4));
         DefaultTableModel model = (DefaultTableModel) JTable.getModel();
         model.getDataVector().removeAllElements();
@@ -126,7 +126,7 @@ public class BarangMasuk extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             out.println("E6" + e);
-            showMessageDialog(null, "Gagal Panggil Data Detail Penjualan");
+            showMessageDialog(null, "Gagal Panggil Data Detail Barang Masuk");
         } finally {
             runSelct.closecon();
         }
@@ -135,17 +135,17 @@ public class BarangMasuk extends javax.swing.JFrame {
 
     Boolean checkInput() {
         if (JDTanggal.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Tanggal Penjualan Tidak Boleh Kosong");
+            JOptionPane.showMessageDialog(this, "Tanggal Barang Masuk Tidak Boleh Kosong");
             return false;
         } else if (JTable.getRowCount() < 1) {
-            JOptionPane.showMessageDialog(this, "Detail Penjualan Tidak Boleh Kosong");
+            JOptionPane.showMessageDialog(this, "Detail Barang Masuk Tidak Boleh Kosong");
             return false;
         } else {
             return true;
         }
     }
 
-    public static String getNoPenjualan() {
+    public static String getNoBarangMasuk() {
         NumberFormat nf = new DecimalFormat("000000");
         String NoTransaksi = null;
         RunSelct runSelct = new RunSelct();
@@ -153,12 +153,12 @@ public class BarangMasuk extends javax.swing.JFrame {
         try {
             ResultSet rs = runSelct.excute();
             if (!rs.isBeforeFirst()) {
-                NoTransaksi = "KB-" + "000001" + "-PJ";
+                NoTransaksi = "KB-" + "000001" + "-BM";
             }
             while (rs.next()) {
-                String nopenjualan = rs.getString("NoTransaksi");
-                String number = nopenjualan.substring(3, 9);
-                //String month = nopenjualan.substring(8, 10);
+                String nobarangmasuk = rs.getString("NoTransaksi");
+                String number = nobarangmasuk.substring(3, 9);
+                //String month = nobarangmasuk.substring(8, 10);
                 int p = 1 + parseInt(number);
                 /*if (month.equals(FDateF.datetostr(new Date(), "MM"))) {
                     p = 1 + parseInt(number);
@@ -166,15 +166,15 @@ public class BarangMasuk extends javax.swing.JFrame {
                     p = 1;
                 }*/
                 if (p != 999999) {
-                    NoTransaksi = "KB-" + nf.format(p) + "-PJ";
+                    NoTransaksi = "KB-" + nf.format(p) + "-BM";
                 } else if (p == 999999) {
                     p = 1;
-                    NoTransaksi = "KB-" + nf.format(p) + "-PJ";
+                    NoTransaksi = "KB-" + nf.format(p) + "-BM";
                 }
             }
         } catch (SQLException e) {
             out.println("E6" + e);
-            showMessageDialog(null, "Gagal Generate Nomor Penjualan");
+            showMessageDialog(null, "Gagal Generate Nomor Barang Masuk");
         } finally {
             runSelct.closecon();
         }
@@ -298,7 +298,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         JTHargaSatuan = new KomponenGUI.JRibuanTextField();
         jbuttonF5 = new KomponenGUI.JbuttonF();
         JTSubTotal = new KomponenGUI.JRibuanTextField();
-        JCPasien = new KomponenGUI.JcomboboxF();
+        JCPemasok = new KomponenGUI.JcomboboxF();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTAKeterangan = new KomponenGUI.JTextAreaF();
         JTGrandTotal = new KomponenGUI.JRibuanTextField();
@@ -317,9 +317,6 @@ public class BarangMasuk extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
         });
 
         LBNoTransaksi.setText("No. Transaksi");
@@ -331,11 +328,6 @@ public class BarangMasuk extends javax.swing.JFrame {
         jlableF3.setText("Keterangan");
 
         JTNoTransaksi.setEnabled(false);
-        JTNoTransaksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTNoTransaksiKeyPressed(evt);
-            }
-        });
 
         jbuttonF1.setText("Tambah");
         jbuttonF1.addActionListener(new java.awt.event.ActionListener() {
@@ -369,17 +361,12 @@ public class BarangMasuk extends javax.swing.JFrame {
             }
         });
 
-        jlableF21.setText("Pasien");
+        jlableF21.setText("Pemasok");
 
         jlableF22.setText(":");
 
         JDTanggal.setDate(new Date());
         JDTanggal.setDateFormatString("dd-MM-yyyy");
-        JDTanggal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JDTanggalKeyPressed(evt);
-            }
-        });
 
         jlableF23.setText("Tanggal");
 
@@ -515,10 +502,10 @@ public class BarangMasuk extends javax.swing.JFrame {
 
         JTSubTotal.setEnabled(false);
 
-        JCPasien.load("SELECT '-' as 'NamaPasien' UNION ALL SELECT `NamaPasien` FROM `tbmpasien` ");
-        JCPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+        JCPemasok.load("SELECT '-' as 'NamaPemasok' UNION ALL SELECT `NamaPemasok` FROM `tbmpemasok` ");
+        JCPemasok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                JCPasienKeyPressed(evt);
+                JCPemasokKeyPressed(evt);
             }
         });
 
@@ -635,7 +622,7 @@ public class BarangMasuk extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jlableF22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JCPasien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(JCPemasok, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbuttonF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jlableF29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -643,10 +630,10 @@ public class BarangMasuk extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jlabelF7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(JTNamaBarang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(JBSearchNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jbuttonF11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jbuttonF11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(JBSearchNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -691,7 +678,7 @@ public class BarangMasuk extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlableF21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlableF22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JCPasien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCPemasok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbuttonF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -715,13 +702,13 @@ public class BarangMasuk extends javax.swing.JFrame {
                     .addComponent(jlabelF10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JBSearchNamaBarang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(JTHargaSatuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(JTSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(JTNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(JTStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(JTJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(JBSearchNamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JTJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -780,18 +767,6 @@ public class BarangMasuk extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jbuttonF4ActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-
-    }//GEN-LAST:event_formWindowClosing
-
-    private void JTNoTransaksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoTransaksiKeyPressed
-
-    }//GEN-LAST:event_JTNoTransaksiKeyPressed
-
-    private void JDTanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JDTanggalKeyPressed
-
-    }//GEN-LAST:event_JDTanggalKeyPressed
-
     private void tambahtableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahtableActionPerformed
         TambahTabel();
     }//GEN-LAST:event_tambahtableActionPerformed
@@ -830,11 +805,11 @@ public class BarangMasuk extends javax.swing.JFrame {
         printing();
     }//GEN-LAST:event_jbuttonF5ActionPerformed
 
-    private void JCPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCPasienKeyPressed
+    private void JCPemasokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JCPemasokKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             JTNamaBarang.requestFocus();
         }
-    }//GEN-LAST:event_JCPasienKeyPressed
+    }//GEN-LAST:event_JCPemasokKeyPressed
 
     private void JTHargaSatuanFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTHargaSatuanFocusLost
         setSubTotal();
@@ -886,9 +861,9 @@ public class BarangMasuk extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if (jbuttonF1.isVisible()) {
-            tambahPenjualan = null;
+            tambahBarangMasuk = null;
         } else {
-            ubahPenjualan = null;
+            ubahBarangMasuk = null;
         }
     }//GEN-LAST:event_formWindowClosed
 
@@ -955,7 +930,7 @@ public class BarangMasuk extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private KomponenGUI.JbuttonF JBSearchNamaBarang;
-    public static KomponenGUI.JcomboboxF JCPasien;
+    public static KomponenGUI.JcomboboxF JCPemasok;
     private KomponenGUI.JdateCF JDTanggal;
     private KomponenGUI.JTextAreaF JTAKeterangan;
     private KomponenGUI.JRibuanTextField JTGrandTotal;
@@ -1004,7 +979,7 @@ public class BarangMasuk extends javax.swing.JFrame {
         if (checkTable()) {
             DefaultTableModel model = (DefaultTableModel) JTable.getModel();
             model.addRow(new Object[]{JTable.getRowCount() + 1, JTNamaBarang.getText(), JTJumlah.getText(), Intformatdigit(JTHargaSatuan.getInt()), JTSubTotal.getText()});
-            JOptionPane.showMessageDialog(this, "Berhasil Tambah Detail Penjualan");
+            JOptionPane.showMessageDialog(this, "Berhasil Tambah Detail Barang Masuk");
             JTNamaBarang.requestFocus();
             RefreshTbl();
             JTGrandTotal.setText(String.valueOf(getGrandTotal()));
@@ -1032,7 +1007,7 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
-                    Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasuk`(`NoTransaksi`, `Tanggal`, `IdPemasok`, `Keterangan`) VALUES ('" + JTNoTransaksi.getText() + "','" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPasien.getSelectedItem() + "'),'" + JTAKeterangan.getText() + "')", null);
+                    Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasuk`(`NoTransaksi`, `Tanggal`, `IdPemasok`, `Keterangan`) VALUES ('" + JTNoTransaksi.getText() + "','" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPemasok.getSelectedItem() + "'),'" + JTAKeterangan.getText() + "')", null);
                     if (Berhasil) {
                         for (int i = 0; i < JTable.getRowCount(); i++) {
                             Berhasil = multiInsert.Excute("INSERT INTO `tbbarangmasukdetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
@@ -1043,17 +1018,17 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil == false) {
                 multiInsert.rollback();
                 multiInsert.closecon();
-                JOptionPane.showMessageDialog(this, "Gagal Tambah Data Penjualan");
+                JOptionPane.showMessageDialog(this, "Gagal Tambah Data Barang Masuk");
             }
             if (Berhasil == true) {
-                JOptionPane.showMessageDialog(this, "Berhasil Tambah Data Penjualan");
+                JOptionPane.showMessageDialog(this, "Berhasil Tambah Data Barang Masuk");
                 multiInsert.Commit();
                 multiInsert.closecon();
                 if (print) {
                     printing();
                 }
-                if (listPenjualan != null) {
-                    listPenjualan.load();
+                if (listBarangMasuk != null) {
+                    listBarangMasuk.load();
                 }
                 if (tutup) {
                     dispose();
@@ -1070,7 +1045,7 @@ public class BarangMasuk extends javax.swing.JFrame {
                     JTable.getColumnModel().getColumn(1).setPreferredWidth(310);
                     JTable.getColumnModel().getColumn(2).setPreferredWidth(85);
                     JTable.getColumnModel().getColumn(3).setPreferredWidth(115);
-                    JTNoTransaksi.setText(getNoPenjualan());
+                    JTNoTransaksi.setText(getNoBarangMasuk());
                 }
             }
         }
@@ -1084,7 +1059,7 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
-                    Berhasil = multiInsert.Excute("UPDATE `tbbarangmasuk` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPemasok`=(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPasien.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdBarangMasuk` = '" + IdEdit + "'", null);
+                    Berhasil = multiInsert.Excute("UPDATE `tbbarangmasuk` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPemasok`=(SELECT `IdPemasok` FROM `tbmpemasok` WHERE `NamaPemasok` = '" + JCPemasok.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdBarangMasuk` = '" + IdEdit + "'", null);
                     if (Berhasil) {
                         Berhasil = multiInsert.Excute("DELETE FROM `tbbarangmasukdetail` WHERE `NoTransaksi` = '" + JTNoTransaksi.getText() + "'", null);
                         if (Berhasil) {
@@ -1098,19 +1073,19 @@ public class BarangMasuk extends javax.swing.JFrame {
             if (Berhasil == false) {
                 multiInsert.rollback();
                 multiInsert.closecon();
-                JOptionPane.showMessageDialog(this, "Gagal Ubah Data Penjualan");
+                JOptionPane.showMessageDialog(this, "Gagal Ubah Data Barang Masuk");
             }
             if (Berhasil == true) {
-                JOptionPane.showMessageDialog(this, "Berhasil Ubah Data Penjualan");
+                JOptionPane.showMessageDialog(this, "Berhasil Ubah Data Barang Masuk");
                 multiInsert.Commit();
                 multiInsert.closecon();
                 if (print) {
                     printing();
                 }
                 dispose();
-                ubahPenjualan = null;
-                if (listPenjualan != null) {
-                    listPenjualan.load();
+                ubahBarangMasuk = null;
+                if (listBarangMasuk != null) {
+                    listBarangMasuk.load();
                 }
             }
         }
