@@ -66,6 +66,7 @@ public class MenuUtama extends javax.swing.JFrame {
         JMList = new javax.swing.JMenu();
         JMIListPacking = new javax.swing.JMenuItem();
         JMIListPenjualan = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         JMLaporan = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -235,6 +236,14 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMList.add(JMIListPenjualan);
 
+        jMenuItem6.setText("3. List Barang");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        JMList.add(jMenuItem6);
+
         JMenuBar.add(JMList);
 
         JMLaporan.setText("Laporan");
@@ -373,6 +382,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        if (listBarangMasuk == null) {
+            listBarangMasuk = new List("Barang Masuk");
+        } else {
+            listBarangMasuk.setState(NORMAL);
+            listBarangMasuk.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -431,6 +449,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
     public static KomponenGUI.JlableF jlableF1;
