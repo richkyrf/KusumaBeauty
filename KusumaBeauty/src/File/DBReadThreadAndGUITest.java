@@ -1,5 +1,7 @@
 package File;
 
+import KomponenGUI.FDateF;
+import java.util.Date;
 import LSubProces.Koneksi;
 import java.sql.*;
 import java.util.concurrent.TimeUnit;
@@ -56,7 +58,7 @@ class DBReaderThread extends Thread {
             Statement statement = con.createStatement();
             while (true) {
                 try {
-                    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM `tbantrian` WHERE `Status` = 0");
+                    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM `tbantrian` WHERE `Status` = 0 AND `Tanggal` = '" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "'");
                     while (resultSet.next()) {
                         MenuUtama.jlableF1.setText("Pasien Hari Ini: " + resultSet.getString(1));
                     }

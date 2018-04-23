@@ -4,6 +4,7 @@ import Eror.LogEror;
 import FunctionGUI.FNumberRenderer;
 import FunctionGUI.FormatRenderer;
 import LSubProces.Koneksi;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.sql.Connection;
@@ -25,6 +26,7 @@ import javax.swing.table.TableColumnModel;
 
 public class JtableF extends JTable {
 
+    boolean usecolor = false;
     String SQL = "";
     Connection con;
     boolean bf = false;
@@ -43,6 +45,24 @@ public class JtableF extends JTable {
         setRowHeight(20);
         setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, null);
         setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, null);
+    }
+
+    public void useColor(boolean bool) {
+        usecolor = bool;
+    }
+
+    public Component prepareRenderer(TableCellRenderer renderer, int row, int col) {
+        Component comp = super.prepareRenderer(renderer, row, col);
+        if (getModel().getValueAt(row, getColumnCount()-1).equals("Antri")) {
+            comp.setBackground(Color.pink);
+        } else if (isRowSelected(row)){
+            comp.setBackground(Color.gray);
+            comp.setForeground(Color.white);
+        } else {
+            comp.setBackground(Color.white);
+            comp.setForeground(Color.black);
+        }
+        return comp;
     }
 
     public void setQuery(String Query) {
@@ -100,7 +120,7 @@ public class JtableF extends JTable {
     public void setbooleanfield(int i) {
         booleanfield = i;
     }
-    
+
     public void setbooleanfield2(int i) {
         booleanfield2 = i;
     }
@@ -167,7 +187,7 @@ public class JtableF extends JTable {
             for (int column = 0; column < getColumnCount(); column++) {
                 TableColumn tableColumn = getColumnModel().getColumn(column);
                 int preferredWidth = 50;
-                int maxWidth = 1000;
+                int maxWidth = 275;
 
                 for (int row = 0; row < getRowCount(); row++) {
                     TableCellRenderer cellRenderer = getCellRenderer(row, column);

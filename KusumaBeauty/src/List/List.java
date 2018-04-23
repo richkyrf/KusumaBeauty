@@ -54,7 +54,10 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Antrian":
                 setTitle("List Antrian");
-                jbuttonF5.setVisible(false);
+                JBRegister.setVisible(false);
+                JBTambah.setVisible(false);
+                JBUbah.setVisible(false);
+                JBHapus.setText("Batal");
                 break;
             case "Master Pemasok":
                 setTitle("List Master Pemasok");
@@ -72,29 +75,40 @@ public class List extends javax.swing.JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         refreshAll();
         if (!GlobalVar.VarL.level.equals("Administrator")) {
-            jbuttonF2.setVisible(false);
+            JBHapus.setVisible(false);
         }
     }
 
     String getNoAntrian() {
         String NoAntrian;
         DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.setQuery("SELECT COUNT(`NoAntrian`), `NoAntrian` FROM `tbantrian` WHERE `TanggalAntrian` = '" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "' ORDER BY `NoAntrian` DESC LIMIT 1 ");
+        dRunSelctOne.seterorm("Gagal getNoAntrian()");
+        dRunSelctOne.setQuery("SELECT COUNT(`NoAntrian`) FROM `tbantrian` WHERE `Tanggal` = '" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "' ORDER BY `NoAntrian` DESC ");
         ArrayList<String> list = dRunSelctOne.excute();
-        if (!list.get(0).equals("0")) {
-            NoAntrian = String.valueOf(Integer.valueOf(list.get(1)) + 1);
-        } else {
+        if (list.get(0).equals("0")) {
             NoAntrian = "1";
+        } else {
+            dRunSelctOne.seterorm("Gagal getNoAntrian()");
+            dRunSelctOne.setQuery("SELECT `NoAntrian` FROM `tbantrian` WHERE `Tanggal` = '" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "' ORDER BY `NoAntrian` DESC ");
+            ArrayList<String> list2 = dRunSelctOne.excute();
+            NoAntrian = String.valueOf(Integer.valueOf(list2.get(0)) + 1);
         }
         return NoAntrian;
     }
 
     void tambahantrian() {
-        Insert insert = new Insert();
-        Boolean berhasil = insert.simpan("INSERT INTO `tbantrian`(`TanggalAntrian`, `NoAntrian`, `IdPasien`) VALUES ('" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "'," + getNoAntrian() + ",'" + jcomCari1.GetIDTable() + "')", "Antrian", this);
-        if (berhasil) {
-            if (listMasterPasien != null) {
-                listMasterPasien.load();
+        if (jcomCari1.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Silahkan Pilih Data Terlebih Dahulu", "Information", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            Insert insert = new Insert();
+            Boolean berhasil = insert.simpan("INSERT INTO `tbantrian`(`Tanggal`, `NoAntrian`, `IdPasien`) VALUES ('" + FDateF.datetostr(new Date(), "yyyy-MM-dd") + "'," + getNoAntrian() + ",'" + jcomCari1.GetIDTable() + "')", "Antrian", this);
+            if (berhasil) {
+                if (listMasterPasien != null) {
+                    listMasterPasien.load();
+                }
+                if (listAntrian != null) {
+                    listAntrian.load();
+                }
             }
         }
     }
@@ -108,12 +122,12 @@ public class List extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jbuttonF1 = new KomponenGUI.JbuttonF();
-        jbuttonF2 = new KomponenGUI.JbuttonF();
-        jbuttonF3 = new KomponenGUI.JbuttonF();
+        JBUbah = new KomponenGUI.JbuttonF();
+        JBHapus = new KomponenGUI.JbuttonF();
+        JBRefresh = new KomponenGUI.JbuttonF();
         jbuttonF4 = new KomponenGUI.JbuttonF();
         jcomCari1 = new KomponenGUI.JcomCari();
-        jbuttonF5 = new KomponenGUI.JbuttonF();
+        JBTambah = new KomponenGUI.JbuttonF();
         JBRegister = new KomponenGUI.JbuttonF();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,24 +137,24 @@ public class List extends javax.swing.JFrame {
             }
         });
 
-        jbuttonF1.setText("Ubah");
-        jbuttonF1.addActionListener(new java.awt.event.ActionListener() {
+        JBUbah.setText("Ubah");
+        JBUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbuttonF1ActionPerformed(evt);
+                JBUbahActionPerformed(evt);
             }
         });
 
-        jbuttonF2.setText("Hapus");
-        jbuttonF2.addActionListener(new java.awt.event.ActionListener() {
+        JBHapus.setText("Hapus");
+        JBHapus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbuttonF2ActionPerformed(evt);
+                JBHapusActionPerformed(evt);
             }
         });
 
-        jbuttonF3.setText("Refresh");
-        jbuttonF3.addActionListener(new java.awt.event.ActionListener() {
+        JBRefresh.setText("Refresh");
+        JBRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbuttonF3ActionPerformed(evt);
+                JBRefreshActionPerformed(evt);
             }
         });
 
@@ -151,10 +165,10 @@ public class List extends javax.swing.JFrame {
             }
         });
 
-        jbuttonF5.setText("Tambah");
-        jbuttonF5.addActionListener(new java.awt.event.ActionListener() {
+        JBTambah.setText("Tambah");
+        JBTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbuttonF5ActionPerformed(evt);
+                JBTambahActionPerformed(evt);
             }
         });
 
@@ -181,13 +195,13 @@ public class List extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbuttonF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBTambah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBUbah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
@@ -197,11 +211,11 @@ public class List extends javax.swing.JFrame {
                 .addComponent(jcomCari1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBUbah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBHapus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbuttonF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBTambah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JBRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -209,25 +223,25 @@ public class List extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbuttonF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF1ActionPerformed
+    private void JBUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBUbahActionPerformed
         ubah();
-    }//GEN-LAST:event_jbuttonF1ActionPerformed
+    }//GEN-LAST:event_JBUbahActionPerformed
 
     private void jbuttonF4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF4ActionPerformed
         dispose();
     }//GEN-LAST:event_jbuttonF4ActionPerformed
 
-    private void jbuttonF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF2ActionPerformed
+    private void JBHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBHapusActionPerformed
         hapus();
-    }//GEN-LAST:event_jbuttonF2ActionPerformed
+    }//GEN-LAST:event_JBHapusActionPerformed
 
-    private void jbuttonF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF3ActionPerformed
+    private void JBRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRefreshActionPerformed
         refreshAll();
-    }//GEN-LAST:event_jbuttonF3ActionPerformed
+    }//GEN-LAST:event_JBRefreshActionPerformed
 
-    private void jbuttonF5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF5ActionPerformed
+    private void JBTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBTambahActionPerformed
         tambah();
-    }//GEN-LAST:event_jbuttonF5ActionPerformed
+    }//GEN-LAST:event_JBTambahActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         switch (Type) {
@@ -264,7 +278,7 @@ public class List extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void JBRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegisterActionPerformed
-
+        tambahantrian();
     }//GEN-LAST:event_JBRegisterActionPerformed
 
     /**
@@ -305,12 +319,12 @@ public class List extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private KomponenGUI.JbuttonF JBHapus;
+    private KomponenGUI.JbuttonF JBRefresh;
     private KomponenGUI.JbuttonF JBRegister;
-    private KomponenGUI.JbuttonF jbuttonF1;
-    private KomponenGUI.JbuttonF jbuttonF2;
-    private KomponenGUI.JbuttonF jbuttonF3;
+    private KomponenGUI.JbuttonF JBTambah;
+    private KomponenGUI.JbuttonF JBUbah;
     private KomponenGUI.JbuttonF jbuttonF4;
-    private KomponenGUI.JbuttonF jbuttonF5;
     private KomponenGUI.JcomCari jcomCari1;
     // End of variables declaration//GEN-END:variables
 
@@ -412,6 +426,9 @@ public class List extends javax.swing.JFrame {
                     break;
                 case "Master Tindakan":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbmtindakan` WHERE `IdTindakan` = " + jcomCari1.GetIDTable(), "Tindakan", this);
+                    break;
+                case "Antrian":
+                    berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbantrian` WHERE `NoAntrian` = " + jcomCari1.GetIDTable() + " AND `Tanggal` = CURDATE()", "Antrian", this);
                     break;
                 case "Master Pemasok":
                     berhasil = delete.Hapus(jcomCari1.GetIDTable(), "DELETE FROM `tbnoenasok` WHERE `IdPemasok` = " + jcomCari1.GetIDTable(), "Pemasok", this);
@@ -518,8 +535,10 @@ public class List extends javax.swing.JFrame {
                 jcomCari1.setOrder(" ORDER BY `NamaDokter` ");
                 break;
             case "Master Pasien":
-                jcomCari1.setQuery("SELECT `IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', `JenisKelamin` as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpasien` WHERE 1");
-                jcomCari1.setOrder(" ORDER BY `NamaPasien` ");
+                jcomCari1.setQuery("SELECT a.`IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', `JenisKelamin` as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu`, IF(`NoAntrian` IS NOT NULL AND `Tanggal` = CURDATE(),'Antri','Tidak') as 'Antrian' FROM `tbmpasien`a LEFT JOIN `tbantrian`b ON a.`IdPasien`=b.`IdPasien` WHERE 1");
+                jcomCari1.jtablef.useColor(true);
+                jcomCari1.setOrder(" ORDER BY `NamaPasien`, a.`IdPasien` ");
+                jcomCari1.setSelectedIndex(11);
                 break;
             case "Master Beautician":
                 jcomCari1.setQuery("SELECT `IdBeautician` as 'ID', `NamaBeautician` as 'Nama Beautician', `NoTelepon` as 'No Telpon', `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmbeautician` WHERE 1 ");
@@ -528,6 +547,10 @@ public class List extends javax.swing.JFrame {
             case "Master Tindakan":
                 jcomCari1.setQuery("SELECT `IdTindakan` as 'ID', `NamaTindakan` as 'Nama Tindakan', IFNULL(`TipeTindakan`,'') as 'Tipe', `Harga`, a.`Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmtindakan`a LEFT JOIN `tbsmtipetindakan`b ON a.`IdTipeTindakan`=b.`IdTipeTindakan` WHERE 1 ");
                 jcomCari1.setOrder(" ORDER BY `NamaTindakan` ");
+                break;
+            case "Antrian":
+                jcomCari1.setQuery("SELECT `NoAntrian`, `KodePasien` as 'Kode', `NamaPasien` as 'Nama', `JenisKelamin` as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu` FROM `tbmpasien`a LEFT JOIN `tbantrian`b ON a.`IdPasien`=b.`IdPasien` WHERE `IdAntrian` IS NOT NULL AND `Tanggal` = CURDATE()");
+                jcomCari1.setOrder(" ORDER BY `NoAntrian` ");
                 break;
             case "Master Pemasok":
                 jcomCari1.setQuery("SELECT `IdPemasok` as 'ID', `NamaPemasok` as 'Nama Pemasok',  `NoTelpon`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpemasok` WHERE 1 ");

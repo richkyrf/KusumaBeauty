@@ -53,7 +53,7 @@ public class MasterPasien extends javax.swing.JFrame {
 
     void loadeditdata() {
         DRunSelctOne dRunSelctOne = new DRunSelctOne();
-        dRunSelctOne.setQuery("SELECT `IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', IF(`JenisKelamin`='L','Laki-Laki','Perempuan') as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, IF(`Status`=1,'Aktif','Tidak Aktif') as 'Status' FROM `tbmpasien` WHERE `IdPasien` = " + IdEdit);
+        dRunSelctOne.setQuery("SELECT `IdPasien` as 'ID', `KodePasien` as 'Kode', `NamaPasien` as 'Nama', IF(`JenisKelamin`='L','Laki-Laki','Perempuan') as 'Jenis Kelamin', DATE_FORMAT(`TanggalDaftar`,'%d-%m-%Y') as 'Tanggal Daftar', DATE_FORMAT(`TanggaLahir`,'%d-%m-%Y') as 'Tanggal Lahir', `NoTelpon` as 'No. Telpon', `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu` FROM `tbmpasien` WHERE `IdPasien` = " + IdEdit);
         ArrayList<String> list = dRunSelctOne.excute();
         JTKodePasien.setText(list.get(1));
         JTNamaPasien.setText(list.get(2));
@@ -64,8 +64,8 @@ public class MasterPasien extends javax.swing.JFrame {
         JTPekerjaan.setText(list.get(7));
         JTEmail.setText(list.get(8));
         JTAlamat.setText(list.get(9));
-        JTAKeterangan.setText(list.get(10));
-        JCBStatus.setSelected(list.get(11).equals("Aktif"));
+        JTCatatan.setText(list.get(10));
+        JTNoKartu.setText(list.get(11));
     }
 
     Boolean checkInput() {
@@ -106,23 +106,16 @@ public class MasterPasien extends javax.swing.JFrame {
 
         jlableF1 = new KomponenGUI.JlableF();
         jlableF2 = new KomponenGUI.JlableF();
-        jlableF3 = new KomponenGUI.JlableF();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        JTAKeterangan = new KomponenGUI.JTextAreaF();
         JTNamaPasien = new KomponenGUI.JtextF();
         jbuttonF1 = new KomponenGUI.JbuttonF();
         jbuttonF2 = new KomponenGUI.JbuttonF();
         jbuttonF4 = new KomponenGUI.JbuttonF();
-        jlableF6 = new KomponenGUI.JlableF();
         jlableF7 = new KomponenGUI.JlableF();
         jlableF8 = new KomponenGUI.JlableF();
         jbuttonF3 = new KomponenGUI.JbuttonF();
         JCJenisKelamin = new KomponenGUI.JcomboboxF();
         jlableF9 = new KomponenGUI.JlableF();
         jlableF10 = new KomponenGUI.JlableF();
-        jlableF4 = new KomponenGUI.JlableF();
-        jlableF11 = new KomponenGUI.JlableF();
-        JCBStatus = new KomponenGUI.JCheckBoxF();
         JTKodePasien = new KomponenGUI.JtextF();
         jlableF5 = new KomponenGUI.JlableF();
         jlableF12 = new KomponenGUI.JlableF();
@@ -142,6 +135,12 @@ public class MasterPasien extends javax.swing.JFrame {
         JTPekerjaan = new KomponenGUI.JtextF();
         JTEmail = new KomponenGUI.JtextF();
         JTAlamat = new KomponenGUI.JtextF();
+        jlableF23 = new KomponenGUI.JlableF();
+        jlableF24 = new KomponenGUI.JlableF();
+        JTCatatan = new KomponenGUI.JtextF();
+        jlableF25 = new KomponenGUI.JlableF();
+        jlableF26 = new KomponenGUI.JlableF();
+        JTNoKartu = new KomponenGUI.JtextF();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -154,17 +153,6 @@ public class MasterPasien extends javax.swing.JFrame {
         jlableF1.setText("Nama Pasien");
 
         jlableF2.setText("Jenis Kelamin");
-
-        jlableF3.setText("Keterangan");
-
-        JTAKeterangan.setColumns(20);
-        JTAKeterangan.setRows(5);
-        JTAKeterangan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTAKeteranganKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(JTAKeterangan);
 
         JTNamaPasien.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -198,8 +186,6 @@ public class MasterPasien extends javax.swing.JFrame {
             }
         });
 
-        jlableF6.setText(":");
-
         jlableF7.setText(":");
 
         jlableF8.setText(":");
@@ -221,12 +207,6 @@ public class MasterPasien extends javax.swing.JFrame {
         jlableF9.setText("Pekerjaan");
 
         jlableF10.setText(":");
-
-        jlableF4.setText("Status");
-
-        jlableF11.setText(":");
-
-        JCBStatus.setText("Aktif");
 
         JTKodePasien.setEnabled(false);
         JTKodePasien.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -292,6 +272,26 @@ public class MasterPasien extends javax.swing.JFrame {
             }
         });
 
+        jlableF23.setText("Catatan");
+
+        jlableF24.setText(":");
+
+        JTCatatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTCatatanKeyPressed(evt);
+            }
+        });
+
+        jlableF25.setText("No. RFID");
+
+        jlableF26.setText(":");
+
+        JTNoKartu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTNoKartuKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -299,6 +299,12 @@ public class MasterPasien extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlableF25, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlableF26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTNoKartu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlableF21, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -326,18 +332,15 @@ public class MasterPasien extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jlableF2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                            .addComponent(jlableF3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlableF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlableF6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlableF7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlableF8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(JTNamaPasien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addComponent(JCJenisKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(JCJenisKelamin, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
@@ -346,12 +349,6 @@ public class MasterPasien extends javax.swing.JFrame {
                         .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlableF4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlableF11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlableF13, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -369,7 +366,13 @@ public class MasterPasien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlableF20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JTEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(JTEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlableF23, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlableF24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTCatatan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -423,16 +426,15 @@ public class MasterPasien extends javax.swing.JFrame {
                     .addComponent(jlableF22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(JTAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlableF3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlableF6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlableF23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlableF24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTCatatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlableF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlableF11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JCBStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jlableF25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlableF26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTNoKartu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbuttonF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,16 +475,6 @@ public class MasterPasien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JCJenisKelaminKeyPressed
 
-    private void JTAKeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAKeteranganKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (jbuttonF1.isVisible()) {
-                tambahData(false);
-            } else {
-                ubahData();
-            }
-        }
-    }//GEN-LAST:event_JTAKeteranganKeyPressed
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         if (IdEdit == null) {
             tambahMasterPasien = null;
@@ -515,7 +507,7 @@ public class MasterPasien extends javax.swing.JFrame {
 
     private void JTAlamatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTAlamatKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            JTAKeterangan.requestFocus();
+            JTCatatan.requestFocus();
         }
     }//GEN-LAST:event_JTAlamatKeyPressed
 
@@ -526,6 +518,22 @@ public class MasterPasien extends javax.swing.JFrame {
     private void JTNamaPasienFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTNamaPasienFocusLost
         getKodePasien();
     }//GEN-LAST:event_JTNamaPasienFocusLost
+
+    private void JTNoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoKartuKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (jbuttonF1.isVisible()) {
+                tambahData(false);
+            } else {
+                ubahData();
+            }
+        }
+    }//GEN-LAST:event_JTNoKartuKeyPressed
+
+    private void JTCatatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTCatatanKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            JTNoKartu.requestFocus();
+        }
+    }//GEN-LAST:event_JTCatatanKeyPressed
 
     /**
      * @param args the command line arguments
@@ -566,25 +574,23 @@ public class MasterPasien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private KomponenGUI.JCheckBoxF JCBStatus;
     public static KomponenGUI.JcomboboxF JCJenisKelamin;
     private KomponenGUI.JdateCF JDTanggalDaftar;
     private KomponenGUI.JdateCF JDTanggalLahir;
-    private KomponenGUI.JTextAreaF JTAKeterangan;
     private KomponenGUI.JtextF JTAlamat;
+    private KomponenGUI.JtextF JTCatatan;
     private KomponenGUI.JtextF JTEmail;
     private KomponenGUI.JtextF JTKodePasien;
     private KomponenGUI.JtextF JTNamaPasien;
+    private KomponenGUI.JtextF JTNoKartu;
     private KomponenGUI.JtextF JTNoTelpon;
     private KomponenGUI.JtextF JTPekerjaan;
-    private javax.swing.JScrollPane jScrollPane1;
     private KomponenGUI.JbuttonF jbuttonF1;
     private KomponenGUI.JbuttonF jbuttonF2;
     private KomponenGUI.JbuttonF jbuttonF3;
     private KomponenGUI.JbuttonF jbuttonF4;
     private KomponenGUI.JlableF jlableF1;
     private KomponenGUI.JlableF jlableF10;
-    private KomponenGUI.JlableF jlableF11;
     private KomponenGUI.JlableF jlableF12;
     private KomponenGUI.JlableF jlableF13;
     private KomponenGUI.JlableF jlableF14;
@@ -597,10 +603,11 @@ public class MasterPasien extends javax.swing.JFrame {
     private KomponenGUI.JlableF jlableF20;
     private KomponenGUI.JlableF jlableF21;
     private KomponenGUI.JlableF jlableF22;
-    private KomponenGUI.JlableF jlableF3;
-    private KomponenGUI.JlableF jlableF4;
+    private KomponenGUI.JlableF jlableF23;
+    private KomponenGUI.JlableF jlableF24;
+    private KomponenGUI.JlableF jlableF25;
+    private KomponenGUI.JlableF jlableF26;
     private KomponenGUI.JlableF jlableF5;
-    private KomponenGUI.JlableF jlableF6;
     private KomponenGUI.JlableF jlableF7;
     private KomponenGUI.JlableF jlableF8;
     private KomponenGUI.JlableF jlableF9;
@@ -609,7 +616,7 @@ public class MasterPasien extends javax.swing.JFrame {
     void tambahData(Boolean tutup) {
         if (checkInput()) {
             Insert insert = new Insert();
-            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Keterangan`, `Status`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "yyyy-MM-dd") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "yyyy-MM-dd") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTAKeterangan.getText() + "'," + JCBStatus.isSelected() + ")", "Pasien", this);
+            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu`, `Catatan`, `NoKartu`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "yyyy-MM-dd") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "yyyy-MM-dd") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTCatatan.getText() + "','" + JTNoKartu.getText() + "')", "Pasien", this);
             if (berhasil) {
                 if (listMasterPasien != null) {
                     listMasterPasien.load();
@@ -628,7 +635,6 @@ public class MasterPasien extends javax.swing.JFrame {
                     JTPekerjaan.setText("");
                     JTEmail.setText("");
                     JTAlamat.setText("");
-                    JTAKeterangan.setText("");
                     JTNamaPasien.requestFocus();
                 }
             }
@@ -638,7 +644,7 @@ public class MasterPasien extends javax.swing.JFrame {
     void ubahData() {
         if (checkInput()) {
             Update update = new Update();
-            Boolean berhasil = update.Ubah("UPDATE `tbmpasien` SET `KodePasien`='" + JTKodePasien.getText() + "',`NamaPasien`='" + JTNamaPasien.getText() + "',`JenisKelamin`='" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "',`TanggalDaftar`='" + FDateF.datetostr(JDTanggalDaftar.getDate(), "dd-MM-yyyy") + "',`TanggaLahir`='" + FDateF.datetostr(JDTanggalLahir.getDate(), "dd-MM-yyyy") + "',`NoTelpon`='" + JTNoTelpon.getText() + "',`Pekerjaan`='" + JTPekerjaan.getText() + "',`Email`='" + JTEmail.getText() + "',`Alamat`='" + JTAlamat.getText() + "',`Keterangan`='" + JTAKeterangan.getText() + "',`Status`=" + JCBStatus.isSelected() + " WHERE `IdPasien` = " + IdEdit, "Pasien", this);
+            Boolean berhasil = update.Ubah("UPDATE `tbmpasien` SET `KodePasien`='" + JTKodePasien.getText() + "',`NamaPasien`='" + JTNamaPasien.getText() + "',`JenisKelamin`='" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "',`TanggalDaftar`='" + FDateF.datetostr(JDTanggalDaftar.getDate(), "dd-MM-yyyy") + "',`TanggaLahir`='" + FDateF.datetostr(JDTanggalLahir.getDate(), "dd-MM-yyyy") + "',`NoTelpon`='" + JTNoTelpon.getText() + "',`Pekerjaan`='" + JTPekerjaan.getText() + "',`Email`='" + JTEmail.getText() + "',`Alamat`='" + JTAlamat.getText() + "', `Catatan` = '" + JTCatatan.getText() + "', `NoKartu` = '" + JTNoKartu.getText() + "' WHERE `IdPasien` = " + IdEdit, "Pasien", this);
             if (berhasil) {
                 dispose();
                 if (listMasterPasien != null) {

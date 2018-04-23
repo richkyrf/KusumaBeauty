@@ -45,6 +45,7 @@ public class MenuUtama extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jlableF1 = new KomponenGUI.JlableF();
         jbuttonF1 = new KomponenGUI.JbuttonF();
+        jbuttonF2 = new KomponenGUI.JbuttonF();
         JMenuBar = new javax.swing.JMenuBar();
         JMFile = new javax.swing.JMenu();
         JMITambahUser = new javax.swing.JMenuItem();
@@ -75,6 +76,11 @@ public class MenuUtama extends javax.swing.JFrame {
         jlableF1.setText("Pasien Hari Ini: 0");
 
         jbuttonF1.setText("Lihat");
+        jbuttonF1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbuttonF1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,7 +91,7 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlableF1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,6 +102,13 @@ public class MenuUtama extends javax.swing.JFrame {
                 .addComponent(jbuttonF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jbuttonF2.setText("Pasien");
+        jbuttonF2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbuttonF2ActionPerformed(evt);
+            }
+        });
 
         JMFile.setText("File");
 
@@ -244,15 +257,19 @@ public class MenuUtama extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(608, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(598, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 421, Short.MAX_VALUE)
+                .addComponent(jbuttonF2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -364,6 +381,24 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jbuttonF2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF2ActionPerformed
+        if (listMasterPasien == null) {
+            listMasterPasien = new List("Master Pasien");
+        } else {
+            listMasterPasien.setState(NORMAL);
+            listMasterPasien.toFront();
+        }
+    }//GEN-LAST:event_jbuttonF2ActionPerformed
+
+    private void jbuttonF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF1ActionPerformed
+        if (listAntrian == null) {
+            listAntrian = new List("Antrian");
+        } else {
+            listAntrian.setState(NORMAL);
+            listAntrian.toFront();
+        }
+    }//GEN-LAST:event_jbuttonF1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -423,6 +458,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
+    private KomponenGUI.JbuttonF jbuttonF2;
     public static KomponenGUI.JlableF jlableF1;
     // End of variables declaration//GEN-END:variables
 }
