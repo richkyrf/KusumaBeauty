@@ -35,5 +35,5 @@ public class Var {
     public static Jcari jcari;
     public static Penjualan tambahPenjualan, ubahPenjualan;
     public static BarangMasuk tambahBarangMasuk, ubahBarangMasuk;
-
+    public static PenyesuaianStok tambahPenyesuaianStok;
 }

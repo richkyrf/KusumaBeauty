@@ -64,6 +64,7 @@ public class MenuUtama extends javax.swing.JFrame {
         JMIProsesAbsenKaryawan = new javax.swing.JMenuItem();
         JMIProsesPacking = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         JMList = new javax.swing.JMenu();
         JMIListPacking = new javax.swing.JMenuItem();
         JMIListPerawatan = new javax.swing.JMenuItem();
@@ -233,6 +234,14 @@ public class MenuUtama extends javax.swing.JFrame {
             }
         });
         JMProses.add(jMenuItem5);
+
+        jMenuItem7.setText("4. Penyesuaian Stok");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        JMProses.add(jMenuItem7);
 
         JMenuBar.add(JMProses);
 
@@ -440,6 +449,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMIResetPasswordUserActionPerformed
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        if (tambahPenyesuaianStok == null) {
+            tambahPenyesuaianStok = new PenyesuaianStok("Penyesuaian Stok");
+        } else {
+            tambahPenyesuaianStok.setState(NORMAL);
+            tambahPenyesuaianStok.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -500,6 +518,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
     private KomponenGUI.JbuttonF jbuttonF2;

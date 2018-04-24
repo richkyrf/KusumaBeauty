@@ -1223,8 +1223,7 @@ public class Penjualan extends javax.swing.JFrame {
      */
     public static void directprinting(String Teks) {
         String testprint = Teks;
-        String defaultPrinter
-                = lookupDefaultPrintService().getName();
+        String defaultPrinter = lookupDefaultPrintService().getName();
         PrintService service = lookupDefaultPrintService();
         try {
             InputStream in = new ByteArrayInputStream(testprint.getBytes());
