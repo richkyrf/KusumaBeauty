@@ -209,11 +209,6 @@ public class MasterPasien extends javax.swing.JFrame {
         jlableF10.setText(":");
 
         JTKodePasien.setEnabled(false);
-        JTKodePasien.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JTKodePasienKeyPressed(evt);
-            }
-        });
 
         jlableF5.setText("Kode Pasien");
 
@@ -482,10 +477,6 @@ public class MasterPasien extends javax.swing.JFrame {
             ubahMasterPasien = null;
         }
     }//GEN-LAST:event_formWindowClosed
-
-    private void JTKodePasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTKodePasienKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JTKodePasienKeyPressed
 
     private void JTNoTelponKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTNoTelponKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {

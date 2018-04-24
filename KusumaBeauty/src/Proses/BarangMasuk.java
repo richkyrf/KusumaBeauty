@@ -488,6 +488,9 @@ public class BarangMasuk extends javax.swing.JFrame {
             }
         });
         JTHargaSatuan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JTHargaSatuanKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 JTHargaSatuanKeyReleased(evt);
             }
@@ -881,6 +884,9 @@ public class BarangMasuk extends javax.swing.JFrame {
 
     private void JTHargaSatuanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTHargaSatuanKeyReleased
         setSubTotal();
+    }//GEN-LAST:event_JTHargaSatuanKeyReleased
+
+    private void JTHargaSatuanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTHargaSatuanKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (tambahtable.isEnabled()) {
                 TambahTabel();
@@ -888,7 +894,7 @@ public class BarangMasuk extends javax.swing.JFrame {
                 ubahtable();
             }
         }
-    }//GEN-LAST:event_JTHargaSatuanKeyReleased
+    }//GEN-LAST:event_JTHargaSatuanKeyPressed
 
     /**
      * @param args the command line arguments
