@@ -130,6 +130,11 @@ public class MenuUtama extends javax.swing.JFrame {
             SFile.setVisible(false);
         }
         JMIResetPasswordUser.setText("Reset Password User");
+        JMIResetPasswordUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIResetPasswordUserActionPerformed(evt);
+            }
+        });
         JMFile.add(JMIResetPasswordUser);
         JMFile.add(SFile);
 
@@ -425,6 +430,15 @@ public class MenuUtama extends javax.swing.JFrame {
             listBarangMasuk.toFront();
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void JMIResetPasswordUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIResetPasswordUserActionPerformed
+        if (resetPasswordUser == null) {
+            resetPasswordUser = new ResetPasswordUser("Reset Password");
+        } else {
+            resetPasswordUser.setState(NORMAL);
+            resetPasswordUser.toFront();
+        }
+    }//GEN-LAST:event_JMIResetPasswordUserActionPerformed
 
 
     /**

@@ -20,12 +20,20 @@ public class ResetPasswordUser extends javax.swing.JFrame {
     /**
      * Creates new form GantiPassword
      */
-    public ResetPasswordUser() {
+    String Type;
+    public ResetPasswordUser(String type) {
+        Type = type;
         initComponents();
+        setVisible(true);
+        switch (Type) {
+            case "Reset Password":
+                setTitle("Reset Password User");
+                break;
+            default:
+                throw new AssertionError();
+        }
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setTitle("Reset Password User");
-        setVisible(true);
     }
 
     /**
@@ -196,7 +204,7 @@ public class ResetPasswordUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ResetPasswordUser();
+                new ResetPasswordUser("").setVisible(true);
             }
         });
     }
