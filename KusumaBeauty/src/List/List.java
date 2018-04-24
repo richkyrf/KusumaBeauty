@@ -15,6 +15,7 @@ import LSubProces.Insert;
 import static Master.MasterPasien.JCJenisKelamin;
 import Proses.BarangMasuk;
 import Proses.Penjualan;
+import Proses.PenyesuaianStok;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -70,6 +71,9 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Barang Masuk":
                 setTitle("List Barang Masuk");
+                break;
+            case "Penyesuaian Stok":
+                setTitle("Penyesuaian Stok");
                 break;
             default:
                 throw new AssertionError();
@@ -294,6 +298,9 @@ public class List extends javax.swing.JFrame {
             case "Barang Masuk":
                 listBarangMasuk = null;
                 break;
+            case "Penyesuaian Stok":
+                listPenyesuaianStok = null;
+                break;
             default:
                 throw new AssertionError();
         }
@@ -432,6 +439,14 @@ public class List extends javax.swing.JFrame {
                 } else {
                     tambahBarangMasuk.setState(NORMAL);
                     tambahBarangMasuk.toFront();
+                }
+                break;
+            case "Penyesuaian Stok":
+                if (tambahPenyesuaianStok == null) {
+                    tambahPenyesuaianStok = new PenyesuaianStok("Penyesuaian Stok");
+                } else {
+                    tambahPenyesuaianStok.setState(NORMAL);
+                    tambahPenyesuaianStok.toFront();
                 }
                 break;
             default:
@@ -598,6 +613,10 @@ public class List extends javax.swing.JFrame {
             case "Barang Masuk":
                 jcomCari1.setQuery("SELECT `IdBarangMasuk` as 'ID', `NoTransaksi` as 'No. Transaksi', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaPemasok`,'-') as 'Nama Pemasok', a.`Keterangan` FROM `tbbarangmasuk`a LEFT JOIN `tbmpemasok`b ON a.`IdPemasok`=b.`IdPemasok` WHERE 1");
                 jcomCari1.setOrder(" ORDER BY `NoTransaksi` DESC ");
+                break;
+            case "Penyesuaian Stok":
+                jcomCari1.setQuery("SELECT `IdPenyesuaian` as 'ID', `NoPenyesuaian` as 'No. Penyesuaian', DATE_FORMAT(`Tanggal`,'%d-%m-%Y') as 'Tanggal', IFNULL(`NamaBarang`,'-') as 'Nama Barang', `Jumlah`, a.`Keterangan` FROM `tbpenyesuaianstok`a LEFT JOIN `tbmbarang`b ON a.`IdBarangLain`=b.`IdBarang` WHERE 1");
+                jcomCari1.setOrder(" ORDER BY `NoPenyesuaian` DESC ");
                 break;
             default:
                 throw new AssertionError();

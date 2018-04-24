@@ -69,6 +69,7 @@ public class MenuUtama extends javax.swing.JFrame {
         JMIListPacking = new javax.swing.JMenuItem();
         JMIListPerawatan = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         JMLaporan = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -271,6 +272,14 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMList.add(jMenuItem6);
 
+        jMenuItem8.setText("4. List Penyesuaian Stok");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        JMList.add(jMenuItem8);
+
         JMenuBar.add(JMList);
 
         JMLaporan.setText("Laporan");
@@ -463,6 +472,15 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        if (listPenyesuaianStok == null) {
+            listPenyesuaianStok = new List("Penyesuaian Stok");
+        } else {
+            listPenyesuaianStok.setState(NORMAL);
+            listPenyesuaianStok.toFront();
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -524,6 +542,7 @@ public class MenuUtama extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private KomponenGUI.JbuttonF jbuttonF1;
     private KomponenGUI.JbuttonF jbuttonF2;
