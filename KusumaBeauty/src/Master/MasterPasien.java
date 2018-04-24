@@ -616,10 +616,14 @@ public class MasterPasien extends javax.swing.JFrame {
     void tambahData(Boolean tutup) {
         if (checkInput()) {
             Insert insert = new Insert();
-            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu`, `Catatan`, `NoKartu`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "yyyy-MM-dd") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "yyyy-MM-dd") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTCatatan.getText() + "','" + JTNoKartu.getText() + "')", "Pasien", this);
+            Boolean berhasil = insert.simpan("INSERT INTO `tbmpasien`(`KodePasien`, `NamaPasien`, `JenisKelamin`, `TanggalDaftar`, `TanggaLahir`, `NoTelpon`, `Pekerjaan`, `Email`, `Alamat`, `Catatan`, `NoKartu`) VALUES ('" + JTKodePasien.getText() + "','" + JTNamaPasien.getText() + "','" + JCJenisKelamin.getSelectedItem().toString().substring(0, 1) + "','" + FDateF.datetostr(JDTanggalDaftar.getDate(), "yyyy-MM-dd") + "','" + FDateF.datetostr(JDTanggalLahir.getDate(), "yyyy-MM-dd") + "','" + JTNoTelpon.getText() + "','" + JTPekerjaan.getText() + "','" + JTEmail.getText() + "','" + JTAlamat.getText() + "','" + JTCatatan.getText() + "','" + JTNoKartu.getText() + "')", "Pasien", this);
             if (berhasil) {
                 if (listMasterPasien != null) {
                     listMasterPasien.load();
+                }
+                if (tambahBarangMasuk != null || ubahBarangMasuk != null) {
+                    Penjualan.JCPasien.load("SELECT `NamaPasien` FROM `tbmpasien`");
+                    Penjualan.JCPasien.setSelectedItem(JTNamaPasien.getText());
                 }
                 if (tambahPenjualan != null || ubahPenjualan != null) {
                     Penjualan.JCPasien.load("SELECT '-' as 'NamaPasien' UNION ALL SELECT `NamaPasien` FROM `tbmpasien` ");
