@@ -125,7 +125,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="JMIProsesPacking">
               <Properties>
-                <Property name="text" type="java.lang.String" value="2. Perawatan"/>
+                <Property name="text" type="java.lang.String" value="2. Tindakan"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMIProsesPackingActionPerformed"/>

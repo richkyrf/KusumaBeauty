@@ -218,7 +218,7 @@ public class MenuUtama extends javax.swing.JFrame {
         });
         JMProses.add(JMIProsesAbsenKaryawan);
 
-        JMIProsesPacking.setText("2. Perawatan");
+        JMIProsesPacking.setText("2. Tindakan");
         JMIProsesPacking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMIProsesPackingActionPerformed(evt);
@@ -356,7 +356,12 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void JMIProsesPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesPackingActionPerformed
-
+        if (tambahTindakan == null) {
+            tambahTindakan = new Tindakan();
+        } else {
+            tambahTindakan.setState(NORMAL);
+            tambahTindakan.toFront();
+        }
     }//GEN-LAST:event_JMIProsesPackingActionPerformed
 
     private void JMIProsesAbsenKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesAbsenKaryawanActionPerformed
