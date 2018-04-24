@@ -626,7 +626,7 @@ public class MasterPasien extends javax.swing.JFrame {
                     Penjualan.JCPasien.setSelectedItem(JTNamaPasien.getText());
                 }
                 if (tambahPenjualan != null || ubahPenjualan != null) {
-                    Penjualan.JCPasien.load("SELECT '-' as 'NamaPasien' UNION ALL SELECT `NamaPasien` FROM `tbmpasien` ");
+                    Penjualan.JCPasien.load("SELECT '-' as 'NamaPasien' UNION ALL SELECT `NamaPasien` FROM `tbmpasien`");
                     Penjualan.JCPasien.setSelectedItem(JTNamaPasien.getText());
                     Penjualan.JCPasien.requestFocus();
                 }
