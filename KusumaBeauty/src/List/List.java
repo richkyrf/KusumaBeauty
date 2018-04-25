@@ -475,7 +475,6 @@ public class List extends javax.swing.JFrame {
             default:
                 throw new AssertionError();
         }
-
     }
 
     void hapus() {
@@ -646,5 +645,4 @@ public class List extends javax.swing.JFrame {
         }
         jcomCari1.tampilkan();
     }
-
 }

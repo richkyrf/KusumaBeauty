@@ -448,6 +448,11 @@ public class Tindakan extends javax.swing.JFrame {
         jlableF17.setText("No. Invoice");
 
         JBKembali.setText("Kembali");
+        JBKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBKembaliActionPerformed(evt);
+            }
+        });
 
         JBTambahTutup.setText("Tambah & Tutup");
         JBTambahTutup.addActionListener(new java.awt.event.ActionListener() {
@@ -565,7 +570,11 @@ public class Tindakan extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlableF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlableF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+<<<<<<< HEAD
                         .addComponent(JCNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+=======
+                        .addComponent(jcomboboxF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> cc4717d204d71a3505cf9bfbfc0b85cf35feb05d
                         .addComponent(jlableF16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlableF17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -660,6 +669,7 @@ public class Tindakan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosed
 
+<<<<<<< HEAD
     private void jbuttonF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF3ActionPerformed
         hapusTableTindakan();
     }//GEN-LAST:event_jbuttonF3ActionPerformed
@@ -699,6 +709,11 @@ public class Tindakan extends javax.swing.JFrame {
     private void JCObatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCObatItemStateChanged
         setHargaObat();
     }//GEN-LAST:event_JCObatItemStateChanged
+=======
+    private void JBKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBKembaliActionPerformed
+        dispose();
+    }//GEN-LAST:event_JBKembaliActionPerformed
+>>>>>>> cc4717d204d71a3505cf9bfbfc0b85cf35feb05d
 
     /**
      * @param args the command line arguments
