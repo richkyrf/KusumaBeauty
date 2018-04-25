@@ -465,7 +465,7 @@ public class PenyesuaianStok extends javax.swing.JFrame {
     void sesuaikan() {
         if (checkInput()) {
             Insert insert = new LSubProces.Insert();
-            insert.simpan("INSERT INTO `tbpenyesuaianstok` (`NoPenyesuaian`, `Tanggal`, `IdBarangLain`, `Jumlah`, `Keterangan`) VALUES ('" + JTNoPenyesuaian.getText() + "', '" + FDateF.datetostr(JDTanggalPenyesuaian.getDate(), "yyyy-MM-dd") + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JCNamaBarang.getSelectedItem() + "'),'" + ((Float.parseFloat(JTStokBaruKG.getText().replace(".", "")) - Float.parseFloat(JTStokLamaKG.getText().replace(".", "").replace(",", ".")))) + "','" + JTAKeterangan.getText() + "')", "Penyesuaian Barang Stok", null);
+            insert.simpan("INSERT INTO `tbpenyesuaianstok` (`NoPenyesuaian`, `Tanggal`, `IdBarangLain`, `Jumlah`, `Keterangan`) VALUES ('" + JTNoPenyesuaian.getText() + "', '" + FDateF.datetostr(JDTanggalPenyesuaian.getDate(), "yyyy-MM-dd") + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JCNamaBarang.getSelectedItem() + "'),'" + (Float.parseFloat(JTStokBaruKG.getText().replace(".", "")) - Float.parseFloat(JTStokLamaKG.getText().replace(".", "").replace(",", "."))) + "','" + JTAKeterangan.getText() + "')", "Penyesuaian Barang Stok", null);
             JTStokLamaKG.setText("0");
             JTStokBaruKG.setText("0");
             JTAKeterangan.setText("");
@@ -474,5 +474,4 @@ public class PenyesuaianStok extends javax.swing.JFrame {
             JCNamaBarang.requestFocus();
         }
     }
-
 }
