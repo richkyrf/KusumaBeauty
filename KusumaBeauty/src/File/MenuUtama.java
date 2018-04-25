@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -373,15 +374,6 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void JMIProsesPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesPackingActionPerformed
-        if (tambahTindakan == null) {
-            tambahTindakan = new Tindakan();
-        } else {
-            tambahTindakan.setState(NORMAL);
-            tambahTindakan.toFront();
-        }
-    }//GEN-LAST:event_JMIProsesPackingActionPerformed
-
     private void JMIProsesAbsenKaryawanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesAbsenKaryawanActionPerformed
         if (tambahPenjualan == null) {
             tambahPenjualan = new Penjualan();
@@ -428,11 +420,15 @@ public class MenuUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_jbuttonF2ActionPerformed
 
     private void jbuttonF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF1ActionPerformed
-        if (listAntrian == null) {
-            listAntrian = new List("Antrian");
+        if (jlableF1.getText().split("\\: ")[1].equals("0")) {
+            JOptionPane.showMessageDialog(this, "Belum Ada Pasien Yang Antri.");
         } else {
-            listAntrian.setState(NORMAL);
-            listAntrian.toFront();
+            if (listAntrian == null) {
+                listAntrian = new List("Antrian");
+            } else {
+                listAntrian.setState(NORMAL);
+                listAntrian.toFront();
+            }
         }
     }//GEN-LAST:event_jbuttonF1ActionPerformed
 
@@ -481,6 +477,18 @@ public class MenuUtama extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void JMIProsesPackingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIProsesPackingActionPerformed
+        if (jlableF1.getText().split("\\: ")[1].equals("0")) {
+            JOptionPane.showMessageDialog(this, "Belum Ada Pasien Yang Antri.");
+        } else {
+            if (listAntrian == null) {
+                listAntrian = new List("Antrian");
+            } else {
+                listAntrian.setState(NORMAL);
+                listAntrian.toFront();
+            }
+        }
+    }//GEN-LAST:event_JMIProsesPackingActionPerformed
 
     /**
      * @param args the command line arguments

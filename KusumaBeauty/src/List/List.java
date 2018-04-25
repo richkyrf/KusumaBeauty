@@ -16,6 +16,8 @@ import static Master.MasterPasien.JCJenisKelamin;
 import Proses.BarangMasuk;
 import Proses.Penjualan;
 import Proses.PenyesuaianStok;
+import Proses.Tindakan;
+import static java.awt.Frame.NORMAL;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JFrame;
@@ -58,7 +60,8 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Antrian":
                 setTitle("List Antrian");
-                JBRegister.setVisible(false);
+                JBRegister.setVisible(true);
+                JBRegister.setText("Tindakan");
                 JBTambah.setVisible(false);
                 JBUbah.setVisible(false);
                 JBHapus.setText("Batal");
@@ -74,6 +77,9 @@ public class List extends javax.swing.JFrame {
                 break;
             case "Penyesuaian Stok":
                 setTitle("Penyesuaian Stok");
+                break;
+            case "Tindakan":
+                setTitle("List Tindakan");
                 break;
             default:
                 throw new AssertionError();
@@ -116,6 +122,19 @@ public class List extends javax.swing.JFrame {
                 if (listAntrian != null) {
                     listAntrian.load();
                 }
+            }
+        }
+    }
+
+    void tambahTindakan() {
+        if (jcomCari1.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(this, "Silahkan Pilih Data Terlebih Dahulu", "Information", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            if (tambahTindakan == null) {
+                tambahTindakan = new Tindakan(jcomCari1.GetIDTable1());
+            } else {
+                tambahTindakan.setState(NORMAL);
+                tambahTindakan.toFront();
             }
         }
     }
@@ -307,7 +326,11 @@ public class List extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void JBRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRegisterActionPerformed
-        tambahantrian();
+        if (Type.equals("Antrian")) {
+            tambahTindakan();
+        } else {
+            tambahantrian();
+        }
     }//GEN-LAST:event_JBRegisterActionPerformed
 
     private void jtextF1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtextF1KeyReleased
