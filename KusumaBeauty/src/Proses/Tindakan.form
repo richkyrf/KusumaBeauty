@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -125,13 +125,15 @@
                   <Component id="JDTanggal" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlableF4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlableF5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcomboboxF1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="JTNoInvoice" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlableF16" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlableF17" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jlableF4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlableF5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcomboboxF1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlableF16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlableF17" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -522,6 +524,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Kembali"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBKembaliActionPerformed"/>
+      </Events>
     </Component>
     <Component class="KomponenGUI.JbuttonF" name="JBTambahTutup">
       <Properties>

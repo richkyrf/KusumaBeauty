@@ -25,13 +25,7 @@ public class ResetPasswordUser extends javax.swing.JFrame {
         Type = type;
         initComponents();
         setVisible(true);
-        switch (Type) {
-            case "Reset Password":
-                setTitle("Reset Password User");
-                break;
-            default:
-                throw new AssertionError();
-        }
+        setTitle("Reset Password User");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
