@@ -3,6 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -290,12 +291,12 @@
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="877" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jbuttonF1" max="32767" attributes="0"/>
-                      <Component id="jbuttonF3" min="-2" pref="97" max="-2" attributes="0"/>
-                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jbuttonF3" max="32767" attributes="0"/>
+                      <Component id="jbuttonF1" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -412,9 +413,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="JCObat" max="32767" attributes="0"/>
+                          <Component id="JCObat" min="-2" pref="665" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="JTJumlahObat" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -423,11 +424,11 @@
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jbuttonF2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbuttonF4" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jbuttonF4" max="32767" attributes="0"/>
+                      <Component id="jbuttonF2" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

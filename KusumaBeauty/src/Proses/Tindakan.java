@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import static GlobalVar.Var.*;
 import LSubProces.DRunSelctOne;
+import LSubProces.MultiInsert;
 import LSubProces.RunSelct;
 import static java.lang.Integer.parseInt;
 import static java.lang.System.out;
@@ -193,6 +194,7 @@ public class Tindakan extends javax.swing.JFrame {
         jlableF19 = new KomponenGUI.JlableF();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -301,11 +303,11 @@ public class Tindakan extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTHargaTindakan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbuttonF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbuttonF3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jbuttonF3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbuttonF1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,19 +389,19 @@ public class Tindakan extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(JCObat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JCObat, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTJumlahObat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(JTHargaObat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbuttonF2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbuttonF4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbuttonF4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbuttonF2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -448,11 +450,6 @@ public class Tindakan extends javax.swing.JFrame {
         jlableF17.setText("No. Invoice");
 
         JBKembali.setText("Kembali");
-        JBKembali.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBKembaliActionPerformed(evt);
-            }
-        });
 
         JBTambahTutup.setText("Tambah & Tutup");
         JBTambahTutup.addActionListener(new java.awt.event.ActionListener() {
@@ -570,11 +567,7 @@ public class Tindakan extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlableF4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlableF5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-<<<<<<< HEAD
                         .addComponent(JCNamaDokter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-=======
-                        .addComponent(jcomboboxF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> cc4717d204d71a3505cf9bfbfc0b85cf35feb05d
                         .addComponent(jlableF16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jlableF17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -669,7 +662,6 @@ public class Tindakan extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosed
 
-<<<<<<< HEAD
     private void jbuttonF3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbuttonF3ActionPerformed
         hapusTableTindakan();
     }//GEN-LAST:event_jbuttonF3ActionPerformed
@@ -709,11 +701,9 @@ public class Tindakan extends javax.swing.JFrame {
     private void JCObatItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_JCObatItemStateChanged
         setHargaObat();
     }//GEN-LAST:event_JCObatItemStateChanged
-=======
     private void JBKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBKembaliActionPerformed
         dispose();
     }//GEN-LAST:event_JBKembaliActionPerformed
->>>>>>> cc4717d204d71a3505cf9bfbfc0b85cf35feb05d
 
     /**
      * @param args the command line arguments
@@ -874,12 +864,12 @@ public class Tindakan extends javax.swing.JFrame {
             if (Berhasil) {
                 Berhasil = multiInsert.setautocomit(false);
                 if (Berhasil) {
-                    Berhasil = multiInsert.Excute("UPDATE `tbpenjualan` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPasien`=(SELECT `IdPasien` FROM `tbmpasien` WHERE `NamaPasien` = '" + JCPasien.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdPenjualan` = '" + IdEdit + "'", null);
+                    //Berhasil = multiInsert.Excute("UPDATE `tbpenjualan` SET `NoTransaksi`='" + JTNoTransaksi.getText() + "',`Tanggal`='" + FDateF.datetostr(JDTanggal.getDate(), "yyyy-MM-dd") + "',`IdPasien`=(SELECT `IdPasien` FROM `tbmpasien` WHERE `NamaPasien` = '" + JCPasien.getSelectedItem() + "'),`Keterangan`='" + JTAKeterangan.getText() + "' WHERE `IdPenjualan` = '" + IdEdit + "'", null);
                     if (Berhasil) {
-                        Berhasil = multiInsert.Excute("DELETE FROM `tbpenjualandetail` WHERE `NoTransaksi` = '" + JTNoTransaksi.getText() + "'", null);
+                        //Berhasil = multiInsert.Excute("DELETE FROM `tbpenjualandetail` WHERE `NoTransaksi` = '" + JTNoTransaksi.getText() + "'", null);
                         if (Berhasil) {
-                            for (int i = 0; i < JTable.getRowCount(); i++) {
-                                Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualandetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
+                            for (int i = 0; i < JTableTindakan.getRowCount(); i++) {
+                                //Berhasil = multiInsert.Excute("INSERT INTO `tbpenjualandetail`(`NoTransaksi`, `NoKolom`, `IdBarang`, `Jumlah`, `Harga`) VALUES ('" + JTNoTransaksi.getText() + "','" + JTable.getValueAt(i, 0) + "',(SELECT `IdBarang` FROM `tbmbarang` WHERE `NamaBarang` = '" + JTable.getValueAt(i, 1) + "'),'" + JTable.getValueAt(i, 2).toString().replace(".", "") + "','" + JTable.getValueAt(i, 3).toString().replace(".", "") + "')", null);
                             }
                         }
                     }
@@ -894,9 +884,9 @@ public class Tindakan extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Berhasil Ubah Data Penjualan");
                 multiInsert.Commit();
                 multiInsert.closecon();
-                if (print) {
-                    printing();
-                }
+//                if (print) {
+//                    printing();
+//                }
                 dispose();
                 ubahPenjualan = null;
                 if (listPenjualan != null) {
